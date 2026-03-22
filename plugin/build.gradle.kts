@@ -2,21 +2,21 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
     java
+    id("io.freefair.lombok") version "9.2.0"
     id("com.gradleup.shadow") version "9.4.0"
     id("de.eldoria.plugin-yml.bukkit") version "0.8.0"
 }
 
 repositories {
     mavenCentral()
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot API
-    maven("https://repo.papermc.io/repository/maven-public/") // BungeeCord Chat API
+    maven("https://repo.papermc.io/repository/maven-public/") // Paper API
     maven("https://repo.extendedclip.com/releases/") // PlaceholderAPI
     maven("https://repo.codemc.io/repository/maven-releases/") // PacketEvents
     maven("https://repo.pyr.lol/releases") // Director
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     compileOnly("org.jetbrains:annotations:26.0.1")
     compileOnly("me.clip:placeholderapi:2.12.2")
     compileOnly("com.github.retrooper:packetevents-spigot:2.11.2")
@@ -26,8 +26,10 @@ dependencies {
     implementation("org.bstats:bstats-bukkit:3.2.1")
     implementation("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.4.0-M2")
     implementation("lol.pyr:director-adventure:2.1.2")
-    implementation("net.kyori:adventure-platform-bukkit:4.4.1")
-    implementation("net.kyori:adventure-text-minimessage:4.26.1")
+
+    implementation("net.kyori:adventure-platform-api:4.4.1") { isTransitive = false }
+    implementation("net.kyori:adventure-platform-facet:4.4.1") { isTransitive = false }
+    implementation("net.kyori:adventure-platform-bukkit:4.4.1") { isTransitive = false }
 }
 
 java {
@@ -77,10 +79,9 @@ tasks.build {
 bukkit {
     name = rootProject.name
     main = "lol.pyr.znpcsplus.ZNpcsPlusBootstrap"
-    provides = listOf("ZNPCsPlus")
     authors = listOf("Pyr", "D3v1s0m", "BlackBaroness")
     load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
-    apiVersion = "1.13"
+    apiVersion = "1.19"
     foliaSupported = true
 
     depend = listOf(

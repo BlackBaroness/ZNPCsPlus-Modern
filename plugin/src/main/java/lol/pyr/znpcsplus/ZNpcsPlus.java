@@ -45,8 +45,6 @@ import lol.pyr.znpcsplus.storage.NpcStorageType;
 import lol.pyr.znpcsplus.tasks.HologramRefreshTask;
 import lol.pyr.znpcsplus.tasks.NpcProcessorTask;
 import lol.pyr.znpcsplus.tasks.ViewableCleanupListener;
-import lol.pyr.znpcsplus.updater.UpdateChecker;
-import lol.pyr.znpcsplus.updater.UpdateNotificationListener;
 import lol.pyr.znpcsplus.user.ClientPacketListener;
 import lol.pyr.znpcsplus.user.UserListener;
 import lol.pyr.znpcsplus.user.UserManager;
@@ -71,9 +69,9 @@ import java.util.*;
 
 public class ZNpcsPlus {
     private final LegacyComponentSerializer textSerializer = LegacyComponentSerializer.builder()
-            .character('&')
-            .hexCharacter('#')
-            .hexColors().build();
+        .character('&')
+        .hexCharacter('#')
+        .hexColors().build();
 
     private final List<Runnable> shutdownTasks = new ArrayList<>();
     private final PacketEventsAPI<Plugin> packetEvents;
@@ -117,7 +115,7 @@ public class ZNpcsPlus {
 
         packetEvents.init();
 
-        BukkitAudiences adventure = BukkitAudiences.create(bootstrap);
+        BukkitAudiences adventure = new NativeBukkitAudiences(bootstrap.getServer());
         shutdownTasks.add(adventure::close);
 
         log(ChatColor.WHITE + " * Initializing components...");
@@ -135,15 +133,15 @@ public class ZNpcsPlus {
         NpcTypeRegistryImpl typeRegistry = new NpcTypeRegistryImpl();
         NpcSerializerRegistryImpl serializerRegistry = new NpcSerializerRegistryImpl(packetFactory, configManager, actionRegistry, typeRegistry, propertyRegistry, textSerializer);
         NpcRegistryImpl npcRegistry = new NpcRegistryImpl(configManager, this, packetFactory, actionRegistry,
-                scheduler, typeRegistry, propertyRegistry, serializerRegistry, textSerializer);
+            scheduler, typeRegistry, propertyRegistry, serializerRegistry, textSerializer);
         shutdownTasks.add(npcRegistry::unload);
 
         UserManager userManager = new UserManager();
         shutdownTasks.add(userManager::shutdown);
 
         DataImporterRegistry importerRegistry = new DataImporterRegistry(configManager, adventure,
-                scheduler, packetFactory, textSerializer, typeRegistry, getDataFolder().getParentFile(),
-                propertyRegistry, skinCache, npcRegistry, bungeeConnector);
+            scheduler, packetFactory, textSerializer, typeRegistry, getDataFolder().getParentFile(),
+            propertyRegistry, skinCache, npcRegistry, bungeeConnector);
 
         log(ChatColor.WHITE + " * Registering components...");
 
@@ -158,15 +156,9 @@ public class ZNpcsPlus {
         pluginManager.registerEvents(new UserListener(userManager), bootstrap);
 
         registerCommands(npcRegistry, skinCache, adventure, actionRegistry,
-                typeRegistry, propertyRegistry, importerRegistry, configManager, packetFactory, serializerRegistry);
+            typeRegistry, propertyRegistry, importerRegistry, configManager, packetFactory, serializerRegistry);
 
         log(ChatColor.WHITE + " * Starting tasks...");
-        if (configManager.getConfig().checkForUpdates()) {
-            UpdateChecker updateChecker = new UpdateChecker(getDescription());
-            scheduler.runDelayedTimerAsync(updateChecker, 5L, 6000L);
-            pluginManager.registerEvents(new UpdateNotificationListener(this, adventure, updateChecker, scheduler), bootstrap);
-        }
-
         scheduler.runDelayedTimerAsync(new NpcProcessorTask(npcRegistry, propertyRegistry, userManager), 60L, 3L);
         scheduler.runDelayedTimerAsync(new HologramRefreshTask(npcRegistry), 60L, 20L);
         scheduler.runDelayedTimerAsync(new SkinCacheCleanTask(skinCache), 1200, 1200);
@@ -215,12 +207,13 @@ public class ZNpcsPlus {
     public void onDisable() {
         NpcApiProvider.unregister();
         Collections.reverse(shutdownTasks);
-        for (Runnable runnable : shutdownTasks) try {
-            runnable.run();
-        } catch (Throwable throwable) {
-            bootstrap.getLogger().severe("One of the registered shutdown tasks threw an exception:");
-            throwable.printStackTrace();
-        }
+        for (Runnable runnable : shutdownTasks)
+            try {
+                runnable.run();
+            } catch (Throwable throwable) {
+                bootstrap.getLogger().severe("One of the registered shutdown tasks threw an exception:");
+                throwable.printStackTrace();
+            }
         shutdownTasks.clear();
         PacketEvents.getAPI().terminate();
     }
@@ -301,48 +294,48 @@ public class ZNpcsPlus {
         registerEnumParser(manager, ZombieNautilusVariant.class, incorrectUsageMessage);
 
         manager.registerCommand("npc", new MultiCommand(bootstrap.loadHelpMessage("root"))
-                .addSubcommand("center", new CenterCommand(npcRegistry))
-                .addSubcommand("create", new CreateCommand(npcRegistry, typeRegistry))
-                .addSubcommand("clone", new CloneCommand(npcRegistry))
-                .addSubcommand("reloadconfig", new ReloadConfigCommand(configManager))
-                .addSubcommand("toggle", new ToggleCommand(npcRegistry))
-                .addSubcommand("skin", new SkinCommand(skinCache, npcRegistry, typeRegistry, propertyRegistry))
-                .addSubcommand("delete", new DeleteCommand(npcRegistry, adventure))
-                .addSubcommand("move", new MoveCommand(npcRegistry))
-                .addSubcommand("teleport", new TeleportCommand(npcRegistry))
-                .addSubcommand("list", new ListCommand(npcRegistry))
-                .addSubcommand("near", new NearCommand(npcRegistry))
-                .addSubcommand("type", new TypeCommand(npcRegistry, typeRegistry))
-                .addSubcommand("setlocation", new SetLocationCommand(npcRegistry))
-                .addSubcommand("lookatme", new LookAtMeCommand(npcRegistry))
-                .addSubcommand("setrotation", new SetRotationCommand(npcRegistry))
-                .addSubcommand("changeid", new ChangeIdCommand(npcRegistry))
-                .addSubcommand("property", new MultiCommand(bootstrap.loadHelpMessage("property"))
-                        .addSubcommand("set", new PropertySetCommand(npcRegistry))
-                        .addSubcommand("remove", new PropertyRemoveCommand(npcRegistry)))
-                .addSubcommand("storage", new MultiCommand(bootstrap.loadHelpMessage("storage"))
-                        .addSubcommand("save", new SaveAllCommand(npcRegistry))
-                        .addSubcommand("reload", new LoadAllCommand(npcRegistry))
-                        .addSubcommand("import", new ImportCommand(npcRegistry, importerRegistry))
-                        .addSubcommand("migrate", new MigrateCommand(configManager, this, packetFactory, actionRegistry, typeRegistry, propertyRegistry, textSerializer, npcRegistry.getStorage(), configManager.getConfig().storageType(), npcRegistry, serializerRegistry)))
-                .addSubcommand("holo", new MultiCommand(bootstrap.loadHelpMessage("holo"))
-                        .addSubcommand("add", new HoloAddCommand(npcRegistry))
-                        .addSubcommand("additem", new HoloAddItemCommand(npcRegistry))
-                        .addSubcommand("delete", new HoloDeleteCommand(npcRegistry))
-                        .addSubcommand("info", new HoloInfoCommand(npcRegistry))
-                        .addSubcommand("insert", new HoloInsertCommand(npcRegistry))
-                        .addSubcommand("insertitem", new HoloInsertItemCommand(npcRegistry))
-                        .addSubcommand("set", new HoloSetCommand(npcRegistry))
-                        .addSubcommand("setitem", new HoloSetItemCommand(npcRegistry))
-                        .addSubcommand("offset", new HoloOffsetCommand(npcRegistry))
-                        .addSubcommand("refreshdelay", new HoloRefreshDelayCommand(npcRegistry)))
-                .addSubcommand("action", new MultiCommand(bootstrap.loadHelpMessage("action"))
-                        .addSubcommand("add", new ActionAddCommand(npcRegistry, actionRegistry))
-                        .addSubcommand("clear", new ActionClearCommand(npcRegistry))
-                        .addSubcommand("delete", new ActionDeleteCommand(npcRegistry))
-                        .addSubcommand("edit", new ActionEditCommand(npcRegistry, actionRegistry))
-                        .addSubcommand("list", new ActionListCommand(npcRegistry)))
-                .addSubcommand("version", new VersionCommand(this))
+            .addSubcommand("center", new CenterCommand(npcRegistry))
+            .addSubcommand("create", new CreateCommand(npcRegistry, typeRegistry))
+            .addSubcommand("clone", new CloneCommand(npcRegistry))
+            .addSubcommand("reloadconfig", new ReloadConfigCommand(configManager))
+            .addSubcommand("toggle", new ToggleCommand(npcRegistry))
+            .addSubcommand("skin", new SkinCommand(skinCache, npcRegistry, typeRegistry, propertyRegistry))
+            .addSubcommand("delete", new DeleteCommand(npcRegistry, adventure))
+            .addSubcommand("move", new MoveCommand(npcRegistry))
+            .addSubcommand("teleport", new TeleportCommand(npcRegistry))
+            .addSubcommand("list", new ListCommand(npcRegistry))
+            .addSubcommand("near", new NearCommand(npcRegistry))
+            .addSubcommand("type", new TypeCommand(npcRegistry, typeRegistry))
+            .addSubcommand("setlocation", new SetLocationCommand(npcRegistry))
+            .addSubcommand("lookatme", new LookAtMeCommand(npcRegistry))
+            .addSubcommand("setrotation", new SetRotationCommand(npcRegistry))
+            .addSubcommand("changeid", new ChangeIdCommand(npcRegistry))
+            .addSubcommand("property", new MultiCommand(bootstrap.loadHelpMessage("property"))
+                .addSubcommand("set", new PropertySetCommand(npcRegistry))
+                .addSubcommand("remove", new PropertyRemoveCommand(npcRegistry)))
+            .addSubcommand("storage", new MultiCommand(bootstrap.loadHelpMessage("storage"))
+                .addSubcommand("save", new SaveAllCommand(npcRegistry))
+                .addSubcommand("reload", new LoadAllCommand(npcRegistry))
+                .addSubcommand("import", new ImportCommand(npcRegistry, importerRegistry))
+                .addSubcommand("migrate", new MigrateCommand(configManager, this, packetFactory, actionRegistry, typeRegistry, propertyRegistry, textSerializer, npcRegistry.getStorage(), configManager.getConfig().storageType(), npcRegistry, serializerRegistry)))
+            .addSubcommand("holo", new MultiCommand(bootstrap.loadHelpMessage("holo"))
+                .addSubcommand("add", new HoloAddCommand(npcRegistry))
+                .addSubcommand("additem", new HoloAddItemCommand(npcRegistry))
+                .addSubcommand("delete", new HoloDeleteCommand(npcRegistry))
+                .addSubcommand("info", new HoloInfoCommand(npcRegistry))
+                .addSubcommand("insert", new HoloInsertCommand(npcRegistry))
+                .addSubcommand("insertitem", new HoloInsertItemCommand(npcRegistry))
+                .addSubcommand("set", new HoloSetCommand(npcRegistry))
+                .addSubcommand("setitem", new HoloSetItemCommand(npcRegistry))
+                .addSubcommand("offset", new HoloOffsetCommand(npcRegistry))
+                .addSubcommand("refreshdelay", new HoloRefreshDelayCommand(npcRegistry)))
+            .addSubcommand("action", new MultiCommand(bootstrap.loadHelpMessage("action"))
+                .addSubcommand("add", new ActionAddCommand(npcRegistry, actionRegistry))
+                .addSubcommand("clear", new ActionClearCommand(npcRegistry))
+                .addSubcommand("delete", new ActionDeleteCommand(npcRegistry))
+                .addSubcommand("edit", new ActionEditCommand(npcRegistry, actionRegistry))
+                .addSubcommand("list", new ActionListCommand(npcRegistry)))
+            .addSubcommand("version", new VersionCommand(this))
         );
     }
 

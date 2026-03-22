@@ -1,14 +1,22 @@
 ## ZNPCsPlus-Modern
 
-Differences from the [original](https://github.com/Pyrbu/ZNPCsPlus):
+A soft fork of [the original ZNPCsPlus](https://github.com/Pyrbu/ZNPCsPlus) with a few improvements:
 
-1. Uses a shared PacketEvents instance instead of shading its own
-   (install it manually: https://github.com/retrooper/packetevents/releases).
-2. Updated to the latest versions of all dependencies
-3. Uses a modern build setup with Kotlin DSL instead of Groovy
-4. Fully compatible with all addons
+- Designed for Paper 1.19+
+- Uses a native Adventure API instead of its own wrapper
+- Uses a shared PacketEvents instance instead of shading its own
+  (you’ll need to install it manually: https://github.com/retrooper/packetevents/releases)
+- Uses `api-version` 1.19 instead of 1.13, so won't hurt performance because of legacy materials init
+- Dependencies are updated to the latest versions
+- Switched to a modern build setup (Kotlin DSL instead of Groovy, better plugins)
+- Removed update checker
 
-This repository is periodically synchronized with the upstream project.
+The goal of this fork is simple — modernize ZNPCsPlus without touching too much of the original code, so it stays as
+stable as upstream.
+
+> ⚠️ The plugin is still named **ZNPCsPlus**, so you can just replace the `.jar` without changing anything.
+
+This repository is periodically synced with the upstream project.
 
 ---
 
