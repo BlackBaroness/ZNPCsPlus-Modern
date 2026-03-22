@@ -11,6 +11,10 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GIT_BRANCH: ${{ github.ref_name }}
+      GIT_COMMIT: ${{ github.sha }}
+      BUILD_ID: ${{ github.run_number }}
     steps:
       - name: Clone project
         uses: actions/checkout@v6
@@ -18,7 +22,7 @@ jobs:
       - name: Install JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '25'
+          java-version: '21'
           distribution: 'temurin'
           check-latest: true
 
@@ -31,8 +35,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          name: '(${{ github.ref_name }}) ${{ github.event.head_commit.message }} (${{ github.sha }})'
-          prerelease: ${{ github.ref != 'refs/heads/master' }}
-          tag_name: ${{ github.ref_name }}-${{ github.sha }}
-          files: |
-            build/libs/Seller.jar
+          tag_name: ${{ github.ref_name }}-build.${{ github.run_number }}
+          name: ZNPCsPlus-Modern ${{ github.ref_name }} build \#${{ github.run_number }}
+          generate_release_notes: true
+          files: plugin/build/libs/ZNPCsPlus-Modern.jar
