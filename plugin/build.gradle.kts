@@ -77,7 +77,8 @@ tasks.build {
 }
 
 bukkit {
-    name = rootProject.name
+    name = "ZNPCsPlus"
+    prefix = rootProject.name
     main = "lol.pyr.znpcsplus.ZNpcsPlusBootstrap"
     authors = listOf("Pyr", "D3v1s0m", "BlackBaroness")
     load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
