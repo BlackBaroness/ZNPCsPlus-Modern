@@ -3,5 +3,6 @@
     "extends": [
         "config:recommended",
         "group:all"
-    ]
+    ],
+    "includeForks": true
 }
