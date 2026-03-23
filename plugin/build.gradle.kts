@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly("org.jetbrains:annotations:26.0.1")
+    compileOnly("org.jetbrains:annotations:26.1.0")
     compileOnly("me.clip:placeholderapi:2.12.2")
     compileOnly("com.github.retrooper:packetevents-spigot:2.11.2")
 
