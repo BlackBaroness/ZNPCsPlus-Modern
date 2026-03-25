@@ -39,7 +39,7 @@ jobs:
           name: 'Build #${{ github.run_number }}'
           generate_release_notes: true
           body: |
-            ❓ What file to choose?
+            # ❓ What file to choose?
             - For 1.16.* or 1.17.*, pick ZNPCsPlus-Modern-1_16.jar
             - For 1.18.* or higher, pick ZNPCsPlus-Modern-1_18.jar
           files: |
