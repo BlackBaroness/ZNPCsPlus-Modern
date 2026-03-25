@@ -104,10 +104,10 @@ public class MigrateCommand implements CommandHandler {
         if (existingEntries.isEmpty()) {
             toStorage.saveNpcs(entries);
             context.send(Component.text("Migrated " + entries.size() + " NPCs from the source storage (", NamedTextColor.GREEN)
-                    .append(Component.text(from.name(), NamedTextColor.GOLD))
-                    .append(Component.text(") to the destination storage (", NamedTextColor.GREEN))
-                    .append(Component.text(to.name(), NamedTextColor.GOLD))
-                    .append(Component.text(").", NamedTextColor.GREEN)));
+                .append(Component.text(from.name(), NamedTextColor.GOLD))
+                .append(Component.text(") to the destination storage (", NamedTextColor.GREEN))
+                .append(Component.text(to.name(), NamedTextColor.GOLD))
+                .append(Component.text(").", NamedTextColor.GREEN)));
             if (currentStorageType == to) {
                 npcRegistry.reload();
             } else {
@@ -126,10 +126,10 @@ public class MigrateCommand implements CommandHandler {
             } else {
                 toStorage.saveNpcs(toSave);
                 context.send(Component.text("Migrated " + toSave.size() + " NPCs from the source storage (", NamedTextColor.GREEN)
-                        .append(Component.text(from.name(), NamedTextColor.GOLD))
-                        .append(Component.text(") to the destination storage (", NamedTextColor.GREEN))
-                        .append(Component.text(to.name(), NamedTextColor.GOLD))
-                        .append(Component.text(").", NamedTextColor.GREEN)));
+                    .append(Component.text(from.name(), NamedTextColor.GOLD))
+                    .append(Component.text(") to the destination storage (", NamedTextColor.GREEN))
+                    .append(Component.text(to.name(), NamedTextColor.GOLD))
+                    .append(Component.text(").", NamedTextColor.GREEN)));
                 if (currentStorageType == to) {
                     npcRegistry.reload();
                 } else {
@@ -142,18 +142,18 @@ public class MigrateCommand implements CommandHandler {
                     component.set(component.get().append(Component.newline()).append(Component.text(e.getId(), NamedTextColor.RED)));
                 });
                 component.set(component.get().append(Component.newline())
-                        .append(Component.text("Use the ", NamedTextColor.YELLOW))
-                        .append(Component.text("force", NamedTextColor.GOLD))
-                        .append(Component.text(" argument to overwrite them.", NamedTextColor.YELLOW)));
+                    .append(Component.text("Use the ", NamedTextColor.YELLOW))
+                    .append(Component.text("force", NamedTextColor.GOLD))
+                    .append(Component.text(" argument to overwrite them.", NamedTextColor.YELLOW)));
                 context.send(component.get());
             }
         } else {
             toStorage.saveNpcs(entries);
             context.send(Component.text("Force migrated " + entries.size() + " NPCs from the source storage (", NamedTextColor.GREEN)
-                    .append(Component.text(from.name(), NamedTextColor.GOLD))
-                    .append(Component.text(") to the destination storage (", NamedTextColor.GREEN))
-                    .append(Component.text(to.name(), NamedTextColor.GOLD))
-                    .append(Component.text(").", NamedTextColor.GREEN)));
+                .append(Component.text(from.name(), NamedTextColor.GOLD))
+                .append(Component.text(") to the destination storage (", NamedTextColor.GREEN))
+                .append(Component.text(to.name(), NamedTextColor.GOLD))
+                .append(Component.text(").", NamedTextColor.GREEN)));
             if (currentStorageType == to) {
                 npcRegistry.reload();
             } else {
@@ -170,7 +170,7 @@ public class MigrateCommand implements CommandHandler {
             NpcStorageType from = context.suggestionParse(0, NpcStorageType.class);
             if (from == null) return Collections.emptyList();
             return context.suggestCollection(Arrays.stream(NpcStorageType.values())
-                    .filter(t -> t != from).map(Enum::name).collect(Collectors.toList()));
+                .filter(t -> t != from).map(Enum::name).collect(Collectors.toList()));
         } else if (context.argSize() == 3) {
             return context.suggestLiteral("true");
         }

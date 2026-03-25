@@ -13,33 +13,38 @@ public interface NpcRegistry {
 
     /**
      * Gets all NPC entries
+     *
      * @return All NPC entries
      */
     Collection<? extends NpcEntry> getAll();
 
     /**
      * Gets all NPC IDs
+     *
      * @return All NPC IDs
      */
     Collection<String> getAllIds();
 
     /**
      * Gets all NPC entries that are player made
+     *
      * @return All player made NPC entries
      */
     Collection<? extends NpcEntry> getAllPlayerMade();
 
     /**
      * Gets IDs of all player made NPCs
+     *
      * @return IDs of all player made NPCs
      */
     Collection<String> getAllPlayerMadeIds();
 
     /**
      * Creates a new NPC entry
-     * @param id The ID of the NPC entry
-     * @param world The {@link World} of the NPC entry
-     * @param type The {@link NpcType} of the NPC entry
+     *
+     * @param id       The ID of the NPC entry
+     * @param world    The {@link World} of the NPC entry
+     * @param type     The {@link NpcType} of the NPC entry
      * @param location The {@link NpcLocation} of the NPC entry
      * @return The entry of the newly created npc
      */
@@ -47,6 +52,7 @@ public interface NpcRegistry {
 
     /**
      * Gets an NPC entry by its ID
+     *
      * @param id The ID of the NPC entry
      * @return The NPC entry
      */
@@ -54,6 +60,7 @@ public interface NpcRegistry {
 
     /**
      * Gets an NPC entry by its UUID
+     *
      * @param uuid The UUID of the NPC entry
      * @return The NPC entry
      */
@@ -61,12 +68,14 @@ public interface NpcRegistry {
 
     /**
      * Deletes an NPC entry by its ID
+     *
      * @param id The ID of the NPC entry
      */
     void delete(String id);
 
     /**
      * Deletes an NPC entry by its UUID
+     *
      * @param uuid The UUID of the NPC entry
      */
     void delete(UUID uuid);
@@ -74,6 +83,7 @@ public interface NpcRegistry {
     /**
      * Register an NPC to this registry
      * NpcEntry instances can be obtained through the NpcSerializer classes
+     *
      * @param entry The npc to be registered
      */
     void register(NpcEntry entry);

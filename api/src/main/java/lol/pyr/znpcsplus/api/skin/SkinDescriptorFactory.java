@@ -8,11 +8,18 @@ import java.util.UUID;
  */
 public interface SkinDescriptorFactory {
     SkinDescriptor createMirrorDescriptor();
+
     SkinDescriptor createRefreshingDescriptor(String playerName);
+
     SkinDescriptor createRefreshingDescriptor(UUID playerUUID);
+
     SkinDescriptor createStaticDescriptor(String playerName);
+
     SkinDescriptor createStaticDescriptor(String texture, String signature);
+
     SkinDescriptor createUrlDescriptor(String url, String variant);
+
     SkinDescriptor createUrlDescriptor(URL url, String variant);
+
     SkinDescriptor createFileDescriptor(String path);
 }

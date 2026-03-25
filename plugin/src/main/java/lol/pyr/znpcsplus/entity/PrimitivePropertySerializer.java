@@ -18,7 +18,8 @@ public class PrimitivePropertySerializer<T> implements PropertySerializer<T> {
     public T deserialize(String property) {
         try {
             return clazz.getConstructor(String.class).newInstance(property);
-        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException |
+                 NoSuchMethodException e) {
             throw new NullPointerException("Failed to deserialize property " + property + " of type " + clazz.getName() + "!");
         }
     }

@@ -150,7 +150,7 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         register(new DummyProperty<>("player_knockback_sound_pitch", 1.0f));
         register(new DummyProperty<>("player_knockback_sound_name", Sound.valueOf(
             PacketEvents.getAPI().getServerManager().getVersion().isOlderThan(ServerVersion.V_1_9) ?
-                    "VILLAGER_NO" : "ENTITY_VILLAGER_NO"
+                "VILLAGER_NO" : "ENTITY_VILLAGER_NO"
         )));
 
         register(new GlowProperty(packetFactory));
@@ -277,7 +277,7 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         else if (ver.isNewerThanOrEquals(ServerVersion.V_1_14)) creeperIndex = 14;
         else if (ver.isNewerThanOrEquals(ServerVersion.V_1_10)) creeperIndex = 12;
         else if (ver.isNewerThanOrEquals(ServerVersion.V_1_9)) creeperIndex = 11;
-        else creeperIndex= 16;
+        else creeperIndex = 16;
         register(new EncodedIntegerProperty<>("creeper_state", CreeperState.IDLE, creeperIndex++, CreeperState::getState));
         register(new BooleanProperty("creeper_charged", creeperIndex, false, legacyBooleans));
 
@@ -364,7 +364,7 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
             linkProperties("is_tame", "is_saddled", "has_chest", "is_eating", "is_rearing", "has_mouth_open");
         } else {
             register(new BooleanProperty("has_chest", horseVariantIndex, false, legacyBooleans));
-            if (ver.isOlderThan(ServerVersion.V_1_21)){
+            if (ver.isOlderThan(ServerVersion.V_1_21)) {
                 linkProperties("is_tame", "is_saddled", "is_eating", "is_rearing", "has_mouth_open");
             } else {
                 linkProperties("is_tame", "is_eating", "is_rearing", "has_mouth_open");
@@ -387,7 +387,8 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
             if (ver.isNewerThanOrEquals(ServerVersion.V_1_10)) ocelotIndex = 15;
             else if (ver.isNewerThanOrEquals(ServerVersion.V_1_9)) ocelotIndex = 14;
             else ocelotIndex = 18;
-            if (legacyBooleans) register(new EncodedByteProperty<>("ocelot_type", OcelotType.OCELOT, ocelotIndex, obj -> (byte) obj.ordinal()));
+            if (legacyBooleans)
+                register(new EncodedByteProperty<>("ocelot_type", OcelotType.OCELOT, ocelotIndex, obj -> (byte) obj.ordinal()));
             else register(new EncodedIntegerProperty<>("ocelot_type", OcelotType.OCELOT, ocelotIndex, Enum::ordinal));
         }
 
@@ -447,15 +448,15 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         if (ver.isNewerThanOrEquals(ServerVersion.V_1_16)) {
             register(new EncodedIntegerProperty<>("wolf_angry", false, wolfIndex++, b -> b ? 1 : 0));
             linkProperties("tamed", "sitting");
-        }
-        else {
+        } else {
             register(new BitsetProperty("wolf_angry", tameableIndex, 0x02));
             linkProperties("wolf_angry", "tamed", "sitting");
         }
 
         // Wither
         int witherIndex;
-        if (ver.isNewerThanOrEquals(ServerVersion.V_1_17)) witherIndex = 16; // using the first index, so we can add the other properties later if needed
+        if (ver.isNewerThanOrEquals(ServerVersion.V_1_17))
+            witherIndex = 16; // using the first index, so we can add the other properties later if needed
         else if (ver.isNewerThanOrEquals(ServerVersion.V_1_15)) witherIndex = 15;
         else if (ver.isNewerThanOrEquals(ServerVersion.V_1_14)) witherIndex = 14;
         else if (ver.isNewerThanOrEquals(ServerVersion.V_1_10)) witherIndex = 12;
@@ -466,8 +467,10 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
 
         // Skeleton
         if (ver.isOlderThan(ServerVersion.V_1_11)) {
-            if (legacyBooleans) register(new EncodedByteProperty<>("skeleton_type", SkeletonType.NORMAL, 13, SkeletonType::getLegacyId));
-            else register(new EncodedIntegerProperty<>("skeleton_type", SkeletonType.NORMAL, ver.isOlderThan(ServerVersion.V_1_10) ? 11 : 12, Enum::ordinal));
+            if (legacyBooleans)
+                register(new EncodedByteProperty<>("skeleton_type", SkeletonType.NORMAL, 13, SkeletonType::getLegacyId));
+            else
+                register(new EncodedIntegerProperty<>("skeleton_type", SkeletonType.NORMAL, ver.isOlderThan(ServerVersion.V_1_10) ? 11 : 12, Enum::ordinal));
         }
 
         // Zombie
@@ -546,7 +549,8 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         else llamaIndex = 17;
 
         // Removed in 1.21
-        if (!ver.isNewerThanOrEquals(ServerVersion.V_1_21)) register(new EncodedIntegerProperty<DyeColor>("carpet_color", DyeColor.class, llamaIndex++, obj -> obj == null ? -1 : obj.ordinal()));
+        if (!ver.isNewerThanOrEquals(ServerVersion.V_1_21))
+            register(new EncodedIntegerProperty<DyeColor>("carpet_color", DyeColor.class, llamaIndex++, obj -> obj == null ? -1 : obj.ordinal()));
         register(new EncodedIntegerProperty<>("llama_variant", LlamaVariant.CREAMY, llamaIndex, Enum::ordinal));
 
         if (!ver.isNewerThanOrEquals(ServerVersion.V_1_12)) return;
@@ -674,10 +678,11 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
 
         // Hoglin and Piglin Zombification
         final int zombificationIndex;
-        if (ver.isNewerThanOrEquals(ServerVersion.V_1_17)) zombificationIndex = 17; // Change piglinIndex, pillagerIndex, striderIndex and vindicatorIndex if you change this
+        if (ver.isNewerThanOrEquals(ServerVersion.V_1_17))
+            zombificationIndex = 17; // Change piglinIndex, pillagerIndex, striderIndex and vindicatorIndex if you change this
         else zombificationIndex = 16;
         register(new BooleanProperty("hoglin_immune_to_zombification", zombificationIndex, false, legacyBooleans));
-        register(new BooleanProperty("piglin_immune_to_zombification", zombificationIndex-1, false, legacyBooleans));
+        register(new BooleanProperty("piglin_immune_to_zombification", zombificationIndex - 1, false, legacyBooleans));
 
         // Piglin
         int piglinIndex = zombificationIndex;
@@ -694,7 +699,7 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         register(new BooleanProperty("strider_saddled", striderIndex, false, legacyBooleans));
 
         // Vindicator
-        int vindicatorIndex = zombificationIndex -1;
+        int vindicatorIndex = zombificationIndex - 1;
         register(new BooleanProperty("celebrating", vindicatorIndex, false, legacyBooleans));
 
         if (!ver.isNewerThanOrEquals(ServerVersion.V_1_17)) return;
@@ -706,7 +711,7 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         register(new BooleanProperty("has_left_horn", 18, true, legacyBooleans));
         register(new BooleanProperty("has_right_horn", 19, true, legacyBooleans));
 
-        register(new EncodedIntegerProperty<>("shaking", false,7, enabled -> enabled ? 140 : 0));
+        register(new EncodedIntegerProperty<>("shaking", false, 7, enabled -> enabled ? 140 : 0));
         if (!ver.isNewerThanOrEquals(ServerVersion.V_1_19)) return;
         // Frog
         register(new EncodedIntegerProperty<>("frog_variant", FrogVariant.TEMPERATE, 17, Enum::ordinal, EntityDataTypes.FROG_VARIANT));
@@ -727,7 +732,7 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         if (!ver.isNewerThanOrEquals(ServerVersion.V_1_20_5)) return;
         // Armadillo
         register(new CustomTypeProperty<>("armadillo_state", 17, ArmadilloState.IDLE, EntityDataTypes.ARMADILLO_STATE, state ->
-                com.github.retrooper.packetevents.protocol.entity.armadillo.ArmadilloState.valueOf(state.name())));
+            com.github.retrooper.packetevents.protocol.entity.armadillo.ArmadilloState.valueOf(state.name())));
 
         // Attribute Scale
         register(new AttributeProperty(packetFactory, "attribute_scale", Attributes.SCALE));
@@ -756,9 +761,9 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
 
         // Copper Golem
         register(new CustomTypeProperty<>("weathering_copper_state", 16, WeatheringCopperState.UNAFFECTED, EntityDataTypes.WEATHERING_COPPER_STATE, state ->
-                com.github.retrooper.packetevents.protocol.entity.data.struct.WeatheringCopperState.valueOf(state.name())));
+            com.github.retrooper.packetevents.protocol.entity.data.struct.WeatheringCopperState.valueOf(state.name())));
         register(new CustomTypeProperty<>("copper_golem_state", 17, CopperGolemState.IDlE, EntityDataTypes.COPPER_GOLEM_STATE, state ->
-                com.github.retrooper.packetevents.protocol.entity.data.struct.CopperGolemState.valueOf(state.name())));
+            com.github.retrooper.packetevents.protocol.entity.data.struct.CopperGolemState.valueOf(state.name())));
 
         if (!ver.isNewerThanOrEquals(ServerVersion.V_1_21_11)) return;
 
@@ -767,8 +772,8 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         nautilusIndex++; // skip unused index
 
         // Zombie Nautilus
-        register(new CustomTypeProperty<>("zombie_nautilus_variant",  nautilusIndex, ZombieNautilusVariant.TEMPERATE, EntityDataTypes.ZOMBIE_NAUTILUS_VARIANT, variant ->
-                ZombieNautilusVariants.getRegistry().getByNameOrThrow(variant.name().toLowerCase())));
+        register(new CustomTypeProperty<>("zombie_nautilus_variant", nautilusIndex, ZombieNautilusVariant.TEMPERATE, EntityDataTypes.ZOMBIE_NAUTILUS_VARIANT, variant ->
+            ZombieNautilusVariants.getRegistry().getByNameOrThrow(variant.name().toLowerCase())));
     }
 
     private void registerSerializer(PropertySerializer<?> serializer) {
@@ -797,15 +802,16 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
 
     private void linkProperties(String... names) {
         linkProperties(Arrays.stream(names)
-                .map(this::getByName)
-                .collect(Collectors.toSet()));
+            .map(this::getByName)
+            .collect(Collectors.toSet()));
     }
 
     private void linkProperties(Collection<EntityPropertyImpl<?>> properties) {
-        for (EntityPropertyImpl<?> property : properties) for (EntityPropertyImpl<?> dependency : properties) {
-            if (property.equals(dependency)) continue;
-            property.addDependency(dependency);
-        }
+        for (EntityPropertyImpl<?> property : properties)
+            for (EntityPropertyImpl<?> dependency : properties) {
+                if (property.equals(dependency)) continue;
+                property.addDependency(dependency);
+            }
     }
 
     public <V> PropertySerializer<V> getSerializer(Class<V> type) {
@@ -815,9 +821,9 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
     @Override
     public Collection<EntityProperty<?>> getAll() {
         return Collections.unmodifiableCollection(
-                byName.values().stream()
-                        .map(property -> (EntityProperty<?>) property)
-                        .collect(Collectors.toSet()));
+            byName.values().stream()
+                .map(property -> (EntityProperty<?>) property)
+                .collect(Collectors.toSet()));
     }
 
     public <T> EntityPropertyImpl<T> getByName(String name, Class<T> type) {

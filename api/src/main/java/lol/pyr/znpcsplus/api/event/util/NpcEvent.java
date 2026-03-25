@@ -14,7 +14,7 @@ public abstract class NpcEvent extends Event {
 
     /**
      * @param player The player involved in the event
-     * @param entry The NPC entry involved in the event
+     * @param entry  The NPC entry involved in the event
      */
     public NpcEvent(Player player, NpcEntry entry) {
         super(true); // All events are async since 99% of the plugin is async
@@ -24,6 +24,7 @@ public abstract class NpcEvent extends Event {
 
     /**
      * Returns the player involved in the event
+     *
      * @return The player involved in the event
      */
     public Player getPlayer() {
@@ -32,6 +33,7 @@ public abstract class NpcEvent extends Event {
 
     /**
      * Returns the NPC entry involved in the event
+     *
      * @return The NPC entry involved in the event
      */
     public NpcEntry getEntry() {
@@ -40,6 +42,7 @@ public abstract class NpcEvent extends Event {
 
     /**
      * Returns the NPC involved in the event
+     *
      * @return The NPC involved in the event
      */
     public Npc getNpc() {

@@ -26,8 +26,8 @@ public interface EntityPropertyRegistry {
      *
      * @param name The name of a property key
      * @param type The class of the expected type of the returned property key
+     * @param <T>  The expected type of the returned property key
      * @return The property key corresponding to the name
-     * @param <T> The expected type of the returned property key
      */
     <T> EntityProperty<T> getByName(String name, Class<T> type);
 
@@ -47,8 +47,8 @@ public interface EntityPropertyRegistry {
     /**
      * Register a dummy property that can be used to store unique information per npc
      *
-     * @param name The name of the new property
-     * @param type The type of the new property
+     * @param name             The name of the new property
+     * @param type             The type of the new property
      * @param playerModifiable Whether this property can be modified by players using commands
      */
     void registerDummy(String name, Class<?> type, boolean playerModifiable);
@@ -56,9 +56,9 @@ public interface EntityPropertyRegistry {
     /**
      * Register a dummy property with a default value (player-modifiable by default)
      *
-     * @param name The name of the new property
+     * @param name         The name of the new property
      * @param defaultValue The default value for this property
-     * @param <T> The type of the property value
+     * @param <T>          The type of the property value
      * @deprecated Use {@link #registerDummy(String, Object, boolean)} instead
      */
     default <T> void registerDummy(String name, T defaultValue) {
@@ -68,10 +68,10 @@ public interface EntityPropertyRegistry {
     /**
      * Register a dummy property with a default value
      *
-     * @param name The name of the new property
-     * @param defaultValue The default value for this property
+     * @param name             The name of the new property
+     * @param defaultValue     The default value for this property
      * @param playerModifiable Whether this property can be modified by players using commands
-     * @param <T> The type of the property value
+     * @param <T>              The type of the property value
      */
     <T> void registerDummy(String name, T defaultValue, boolean playerModifiable);
 }

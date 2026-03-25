@@ -31,20 +31,20 @@ public class V1_19_3PacketFactory extends V1_17PacketFactory {
         if (entity.getType() != EntityTypes.PLAYER) return CompletableFuture.completedFuture(null);
         CompletableFuture<Void> future = new CompletableFuture<>();
         Component displayName = tabListDisplayNameProperty != null && properties.hasProperty(tabListDisplayNameProperty.get()) ?
-                PapiUtil.set(textSerializer, player, properties.getProperty(tabListDisplayNameProperty.get())) :
-                Component.text(PapiUtil.set(player, configManager.getConfig().tabDisplayName()
-                        .replace("{id}", Integer.toString(entity.getEntityId()))
-                        .replace("{name}", displayNameProperty != null && properties.hasProperty(displayNameProperty.get()) ?
-                                properties.getProperty(displayNameProperty.get()) :
-                                "")
-                ));
+            PapiUtil.set(textSerializer, player, properties.getProperty(tabListDisplayNameProperty.get())) :
+            Component.text(PapiUtil.set(player, configManager.getConfig().tabDisplayName()
+                .replace("{id}", Integer.toString(entity.getEntityId()))
+                .replace("{name}", displayNameProperty != null && properties.hasProperty(displayNameProperty.get()) ?
+                    properties.getProperty(displayNameProperty.get()) :
+                    "")
+            ));
         skinned(player, properties, new UserProfile(entity.getUuid(), Integer.toString(entity.getEntityId()))).thenAccept(profile -> {
             WrapperPlayServerPlayerInfoUpdate.PlayerInfo info = new WrapperPlayServerPlayerInfoUpdate.PlayerInfo(
-                    profile, false, 1, GameMode.CREATIVE,
-                    displayName, null);
+                profile, false, 1, GameMode.CREATIVE,
+                displayName, null);
             sendPacket(player, new WrapperPlayServerPlayerInfoUpdate(EnumSet.of(WrapperPlayServerPlayerInfoUpdate.Action.ADD_PLAYER,
-                    WrapperPlayServerPlayerInfoUpdate.Action.UPDATE_LISTED, WrapperPlayServerPlayerInfoUpdate.Action.UPDATE_DISPLAY_NAME),
-                    info));
+                WrapperPlayServerPlayerInfoUpdate.Action.UPDATE_LISTED, WrapperPlayServerPlayerInfoUpdate.Action.UPDATE_DISPLAY_NAME),
+                info));
             future.complete(null);
         });
         return future;
@@ -60,8 +60,8 @@ public class V1_19_3PacketFactory extends V1_17PacketFactory {
     public void updateDisplayName(Player player, PacketEntity entity, Component displayName) {
         if (entity.getType() != EntityTypes.PLAYER) return;
         sendPacket(player, new WrapperPlayServerPlayerInfoUpdate(WrapperPlayServerPlayerInfoUpdate.Action.UPDATE_DISPLAY_NAME,
-                new WrapperPlayServerPlayerInfoUpdate.PlayerInfo(new UserProfile(entity.getUuid(), null),
-                        false, 1, null, displayName, null))
+            new WrapperPlayServerPlayerInfoUpdate.PlayerInfo(new UserProfile(entity.getUuid(), null),
+                false, 1, null, displayName, null))
         );
     }
 }

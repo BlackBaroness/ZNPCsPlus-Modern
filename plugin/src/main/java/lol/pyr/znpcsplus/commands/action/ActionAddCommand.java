@@ -27,24 +27,27 @@ public class ActionAddCommand implements CommandHandler {
         List<InteractionCommandHandler> commands = actionRegistry.getCommands();
         context.setUsage(context.getLabel() + " action add <action type>");
         String sub = context.popString();
-        for (InteractionCommandHandler command : commands) if (command.getSubcommandName().equalsIgnoreCase(sub)) {
-            context.setUsage(context.getLabel() + " action add");
-            command.run(context);
-            return;
-        }
+        for (InteractionCommandHandler command : commands)
+            if (command.getSubcommandName().equalsIgnoreCase(sub)) {
+                context.setUsage(context.getLabel() + " action add");
+                command.run(context);
+                return;
+            }
         context.send(Component.text("Invalid action type, available action types:\n" +
-                commands.stream().map(InteractionCommandHandler::getSubcommandName).collect(Collectors.joining(", ")), NamedTextColor.RED));
+            commands.stream().map(InteractionCommandHandler::getSubcommandName).collect(Collectors.joining(", ")), NamedTextColor.RED));
     }
 
     @Override
     public List<String> suggest(CommandContext context) throws CommandExecutionException {
         List<InteractionCommandHandler> commands = actionRegistry.getCommands();
-        if (context.argSize() == 1) return context.suggestStream(commands.stream().map(InteractionCommandHandler::getSubcommandName));
+        if (context.argSize() == 1)
+            return context.suggestStream(commands.stream().map(InteractionCommandHandler::getSubcommandName));
         if (context.argSize() == 2) return context.suggestCollection(npcRegistry.getModifiableIds());
         if (context.argSize() >= 3) {
             String sub = context.popString();
             context.popString();
-            for (InteractionCommandHandler command : commands) if (command.getSubcommandName().equalsIgnoreCase(sub)) return command.suggest(context);
+            for (InteractionCommandHandler command : commands)
+                if (command.getSubcommandName().equalsIgnoreCase(sub)) return command.suggest(context);
         }
         return Collections.emptyList();
     }

@@ -23,7 +23,8 @@ public class ActionClearCommand implements CommandHandler {
     public void run(CommandContext context) throws CommandExecutionException {
         context.setUsage(context.getLabel() + " action clear <id>");
         NpcImpl npc = context.parse(NpcEntryImpl.class).getNpc();
-        if (npc.getActions().size() == 0) context.halt(Component.text("That npc doesn't have any actions", NamedTextColor.RED));
+        if (npc.getActions().size() == 0)
+            context.halt(Component.text("That npc doesn't have any actions", NamedTextColor.RED));
         npc.clearActions();
         context.send(Component.text("Removed all actions from the npc", NamedTextColor.GREEN));
     }

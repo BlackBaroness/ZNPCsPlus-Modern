@@ -12,7 +12,7 @@ public abstract class CancellableNpcEvent extends NpcEvent implements Cancellabl
 
     /**
      * @param player The player involved in the event
-     * @param entry The NPC entry involved in the event
+     * @param entry  The NPC entry involved in the event
      */
     public CancellableNpcEvent(Player player, NpcEntry entry) {
         super(player, entry);

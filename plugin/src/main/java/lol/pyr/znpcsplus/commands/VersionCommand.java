@@ -60,7 +60,7 @@ public class VersionCommand implements CommandHandler {
         String version = versionBuilder.toString();
 
         context.send(Component.text(version, NamedTextColor.GREEN)
-                .hoverEvent(Component.text("Click to copy version to clipboard"))
-                .clickEvent(ClickEvent.copyToClipboard(version)));
+            .hoverEvent(Component.text("Click to copy version to clipboard"))
+            .clickEvent(ClickEvent.copyToClipboard(version)));
     }
 }

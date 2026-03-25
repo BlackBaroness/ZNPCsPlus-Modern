@@ -26,7 +26,7 @@ public class RabbitTypeProperty extends EntityPropertyImpl<RabbitType> {
         this.optional = optional;
         Component name = Component.text("Toast");
         this.serialized = legacyNames ? AdventureSerializer.serializer().legacy().serialize(name) :
-                optional ? name : LegacyComponentSerializer.legacySection().serialize(name);
+            optional ? name : LegacyComponentSerializer.legacySection().serialize(name);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class RabbitTypeProperty extends EntityPropertyImpl<RabbitType> {
         if (rabbitType == null) return;
         if (!rabbitType.equals(RabbitType.TOAST)) {
             properties.put(index, legacyBooleans ?
-                    newEntityData(index, EntityDataTypes.BYTE, (byte) rabbitType.getId()) :
-                    newEntityData(index, EntityDataTypes.INT, rabbitType.getId()));
+                newEntityData(index, EntityDataTypes.BYTE, (byte) rabbitType.getId()) :
+                newEntityData(index, EntityDataTypes.INT, rabbitType.getId()));
             if (optional) {
                 properties.put(2, new EntityData<>(2, EntityDataTypes.OPTIONAL_ADV_COMPONENT, Optional.empty()));
             } else {

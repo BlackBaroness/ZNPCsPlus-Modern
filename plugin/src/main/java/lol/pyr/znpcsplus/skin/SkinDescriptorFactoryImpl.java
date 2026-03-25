@@ -3,8 +3,8 @@ package lol.pyr.znpcsplus.skin;
 import lol.pyr.znpcsplus.api.skin.SkinDescriptor;
 import lol.pyr.znpcsplus.api.skin.SkinDescriptorFactory;
 import lol.pyr.znpcsplus.skin.cache.MojangSkinCache;
-import lol.pyr.znpcsplus.skin.descriptor.NameFetchingDescriptor;
 import lol.pyr.znpcsplus.skin.descriptor.MirrorDescriptor;
+import lol.pyr.znpcsplus.skin.descriptor.NameFetchingDescriptor;
 import lol.pyr.znpcsplus.skin.descriptor.PrefetchedDescriptor;
 import lol.pyr.znpcsplus.skin.descriptor.UUIDFetchingDescriptor;
 

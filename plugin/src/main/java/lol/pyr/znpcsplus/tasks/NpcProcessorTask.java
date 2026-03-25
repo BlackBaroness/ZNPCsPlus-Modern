@@ -40,7 +40,7 @@ public class NpcProcessorTask extends BukkitRunnable {
     EntityPropertyImpl<Float> playerKnockbackSoundVolumeProperty;
     EntityPropertyImpl<Float> playerKnockbackSoundPitchProperty;
 
-    public NpcProcessorTask(NpcRegistryImpl npcRegistry, EntityPropertyRegistryImpl propertyRegistry,UserManager userManager) {
+    public NpcProcessorTask(NpcRegistryImpl npcRegistry, EntityPropertyRegistryImpl propertyRegistry, UserManager userManager) {
         this.npcRegistry = npcRegistry;
         this.propertyRegistry = propertyRegistry;
         this.userManager = userManager;
@@ -88,10 +88,10 @@ public class NpcProcessorTask extends BukkitRunnable {
             LookType lookType = npc.getProperty(lookProperty);
             boolean perPlayerLook = lookType.equals(LookType.PER_PLAYER);
             viewDistance = NumberConversions.square(npc.getProperty(viewDistanceProperty));
-            lookDistance =  NumberConversions.square(npc.getProperty(lookDistanceProperty));
+            lookDistance = NumberConversions.square(npc.getProperty(lookDistanceProperty));
             lookReturn = npc.getProperty(lookReturnProperty);
             permissionRequired = npc.getProperty(permissionRequiredProperty);
-            if(permissionRequired){
+            if (permissionRequired) {
                 permissionRequiredPerm = npc.getProperty(permissionNodeProperty);
             }
             playerKnockback = npc.getProperty(playerKnockbackProperty);

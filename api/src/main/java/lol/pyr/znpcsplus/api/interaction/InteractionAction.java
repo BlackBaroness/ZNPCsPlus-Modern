@@ -29,8 +29,8 @@ public abstract class InteractionAction {
     private final InteractionType interactionType;
 
     /**
-     * @param cooldown The cooldown of this interaction in seconds
-     * @param delay The delay of this interaction in ticks
+     * @param cooldown        The cooldown of this interaction in seconds
+     * @param delay           The delay of this interaction in ticks
      * @param interactionType The type of this interaction
      */
     protected InteractionAction(long cooldown, long delay, InteractionType interactionType) {
@@ -70,6 +70,7 @@ public abstract class InteractionAction {
 
     /**
      * Runs this interaction
+     *
      * @param player The player that triggered this interaction
      */
     public abstract void run(Player player);

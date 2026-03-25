@@ -4,8 +4,14 @@ import org.bukkit.entity.Player;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public abstract class Viewable {
@@ -15,8 +21,8 @@ public abstract class Viewable {
         synchronized (all) {
             all.removeIf(reference -> reference.get() == null);
             return all.stream()
-                    .map(Reference::get)
-                    .collect(Collectors.toList());
+                .map(Reference::get)
+                .collect(Collectors.toList());
         }
     }
 
@@ -86,8 +92,8 @@ public abstract class Viewable {
 
     protected CompletableFuture<Void> UNSAFE_showAll() {
         return FutureUtil.allOf(viewers.stream()
-                .map(this::UNSAFE_show)
-                .collect(Collectors.toList()));
+            .map(this::UNSAFE_show)
+            .collect(Collectors.toList()));
     }
 
     public Set<Player> getViewers() {

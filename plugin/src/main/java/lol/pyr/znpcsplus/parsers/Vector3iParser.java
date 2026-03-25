@@ -20,9 +20,9 @@ public class Vector3iParser extends ParserType<Vector3i> {
         }
         try {
             return new Vector3i(
-                    Integer.parseInt(deque.pop()),
-                    Integer.parseInt(deque.pop()),
-                    Integer.parseInt(deque.pop()));
+                Integer.parseInt(deque.pop()),
+                Integer.parseInt(deque.pop()),
+                Integer.parseInt(deque.pop()));
         } catch (NumberFormatException e) {
             throw new CommandExecutionException();
         }

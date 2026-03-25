@@ -2,7 +2,7 @@ package lol.pyr.znpcsplus.util;
 
 import java.util.function.Supplier;
 
-public class LazyLoader <T> {
+public class LazyLoader<T> {
     private final Supplier<T> supplier;
     private T value;
 

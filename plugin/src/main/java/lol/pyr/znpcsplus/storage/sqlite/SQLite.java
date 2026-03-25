@@ -7,23 +7,24 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Logger;
 
-public class SQLite extends Database{
+public class SQLite extends Database {
     private final File dbFile;
-    public SQLite(File file, Logger logger){
+
+    public SQLite(File file, Logger logger) {
         super(logger);
         dbFile = file;
     }
 
     public Connection getSQLConnection() {
-        if (!dbFile.exists()){
+        if (!dbFile.exists()) {
             try {
                 dbFile.createNewFile();
             } catch (IOException e) {
-                logger.severe("File write error: "+dbFile.getName());
+                logger.severe("File write error: " + dbFile.getName());
             }
         }
         try {
-            if(connection!=null&&!connection.isClosed()){
+            if (connection != null && !connection.isClosed()) {
                 return connection;
             }
             Class.forName("org.sqlite.JDBC");

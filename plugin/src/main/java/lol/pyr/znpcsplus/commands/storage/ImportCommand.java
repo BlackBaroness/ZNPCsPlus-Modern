@@ -31,7 +31,7 @@ public class ImportCommand implements CommandHandler {
         String id = context.popString().toUpperCase();
         DataImporter importer = importerRegistry.getImporter(id);
         if (importer == null) context.halt(Component.text("Importer not found! Possible importers: " +
-                String.join(", ", importerRegistry.getIds()), NamedTextColor.RED));
+            String.join(", ", importerRegistry.getIds()), NamedTextColor.RED));
 
         FutureUtil.exceptionPrintingRunAsync(() -> {
             if (!importer.isValid()) {

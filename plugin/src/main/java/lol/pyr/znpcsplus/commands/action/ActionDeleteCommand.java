@@ -25,7 +25,8 @@ public class ActionDeleteCommand implements CommandHandler {
         context.setUsage(context.getLabel() + " action delete <id> <index>");
         NpcImpl npc = context.parse(NpcEntryImpl.class).getNpc();
         int index = context.parse(Integer.class);
-        if (index >= npc.getActions().size() || index < 0) context.halt(Component.text("That npc doesn't have any action with the index " + index, NamedTextColor.RED));
+        if (index >= npc.getActions().size() || index < 0)
+            context.halt(Component.text("That npc doesn't have any action with the index " + index, NamedTextColor.RED));
         npc.removeAction(index);
         context.send(Component.text("Removed action with index " + index, NamedTextColor.GREEN));
     }
@@ -34,8 +35,8 @@ public class ActionDeleteCommand implements CommandHandler {
     public List<String> suggest(CommandContext context) throws CommandExecutionException {
         if (context.argSize() == 1) return context.suggestCollection(npcRegistry.getModifiableIds());
         if (context.argSize() == 2) return context.suggestStream(Stream.iterate(0, n -> n + 1)
-                .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getActions().size())
-                .map(String::valueOf));
+            .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getActions().size())
+            .map(String::valueOf));
         return Collections.emptyList();
     }
 }

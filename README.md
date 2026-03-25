@@ -2,11 +2,11 @@
 
 A soft fork of [the original ZNPCsPlus](https://github.com/Pyrbu/ZNPCsPlus) with a few improvements:
 
-- Designed for Paper 1.19+
+- Designed for Paper 1.16+
 - Uses a native Adventure API instead of its own wrapper
 - Uses a shared PacketEvents instance instead of shading its own
   (you’ll need to install it manually: https://github.com/retrooper/packetevents/releases)
-- Uses `api-version` 1.19 instead of 1.13, so won't hurt performance because of legacy materials init
+- Uses `api-version` 1.16 (or 1.18) instead of 1.13, so won't hurt performance because of legacy materials init
 - Dependencies are updated to the latest versions
 - Switched to a modern build setup (Kotlin DSL instead of Groovy, better plugins)
 - Removed update checker

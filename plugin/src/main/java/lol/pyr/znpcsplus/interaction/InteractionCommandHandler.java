@@ -13,6 +13,7 @@ public interface InteractionCommandHandler extends CommandHandler {
     String getSubcommandName();
 
     InteractionAction parse(CommandContext context) throws CommandExecutionException;
+
     void appendUsage(CommandContext context);
 
     @Override

@@ -25,8 +25,8 @@ public interface MainConfig {
 
     @ConfKey("debug-enabled")
     @ConfComments({
-            "Should debug mode be enabled?",
-            "This is used in development to test various things, you probably don't want to enable this"
+        "Should debug mode be enabled?",
+        "This is used in development to test various things, you probably don't want to enable this"
     })
     @DefaultBoolean(false)
     boolean debugEnabled();
@@ -59,12 +59,12 @@ public interface MainConfig {
     @ConfComments("How far should the look property work from in blocks")
     @DefaultDouble(10)
     double lookPropertyDistance();
-    
+
     @ConfKey("tab-hide-delay")
     @ConfComments({
-            "The amount of time to wait before removing the npc from the player list (aka tab) in ticks",
-            "If you're on 1.19.2 or above changing this value will have almost no effect since npcs are hidden in tab",
-            "WARNING: Setting this value too low may cause issues with player npcs spawning"
+        "The amount of time to wait before removing the npc from the player list (aka tab) in ticks",
+        "If you're on 1.19.2 or above changing this value will have almost no effect since npcs are hidden in tab",
+        "WARNING: Setting this value too low may cause issues with player npcs spawning"
     })
     @DefaultInteger(60)
     int tabHideDelay();

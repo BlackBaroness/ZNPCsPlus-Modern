@@ -1,10 +1,10 @@
 package lol.pyr.znpcsplus;
 
+import io.github.blackbaroness.znpcplusmodern.MiniMessageProvider;
 import lol.pyr.director.adventure.command.CommandContext;
 import lol.pyr.director.common.message.Message;
 import lol.pyr.znpcsplus.util.FileUtil;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -63,7 +63,7 @@ public class ZNpcsPlusBootstrap extends JavaPlugin {
     }
 
     protected Message<CommandContext> loadHelpMessage(String name) {
-        Component component = MiniMessage.miniMessage().deserialize(loadMessageFile(name));
+        Component component = MiniMessageProvider.get().deserialize(loadMessageFile(name));
         return context -> context.send(component);
     }
 

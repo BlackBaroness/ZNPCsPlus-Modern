@@ -26,7 +26,8 @@ public class HoloInsertItemCommand implements CommandHandler {
         context.setUsage(context.getLabel() + " holo insertitem <id> <line>");
         HologramImpl hologram = context.parse(NpcEntryImpl.class).getNpc().getHologram();
         int line = context.parse(Integer.class);
-        if (line < 0 || line >= hologram.getLines().size()) context.halt(Component.text("Invalid line number!", NamedTextColor.RED));
+        if (line < 0 || line >= hologram.getLines().size())
+            context.halt(Component.text("Invalid line number!", NamedTextColor.RED));
         Player player = context.ensureSenderIsPlayer();
         org.bukkit.inventory.ItemStack itemStack = player.getInventory().getItemInHand();
         if (itemStack == null) context.halt(Component.text("You must be holding an item!", NamedTextColor.RED));
@@ -38,8 +39,8 @@ public class HoloInsertItemCommand implements CommandHandler {
     public List<String> suggest(CommandContext context) throws CommandExecutionException {
         if (context.argSize() == 1) return context.suggestCollection(npcRegistry.getModifiableIds());
         if (context.argSize() == 2) return context.suggestStream(Stream.iterate(0, n -> n + 1)
-                .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getHologram().getLines().size())
-                .map(String::valueOf));
+            .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getHologram().getLines().size())
+            .map(String::valueOf));
         return Collections.emptyList();
     }
 }

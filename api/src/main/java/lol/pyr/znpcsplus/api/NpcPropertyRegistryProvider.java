@@ -22,8 +22,8 @@ public class NpcPropertyRegistryProvider {
      */
     public static EntityPropertyRegistry get() {
         if (registry == null) throw new IllegalStateException(
-                "ZNPCsPlus plugin isn't loaded yet!\n" +
-                        "Please add it to your plugin.yml as a depend or softdepend."
+            "ZNPCsPlus plugin isn't loaded yet!\n" +
+                "Please add it to your plugin.yml as a depend or softdepend."
         );
         return registry;
     }
@@ -33,7 +33,7 @@ public class NpcPropertyRegistryProvider {
      * You probably shouldn't call this method under any circumstances
      *
      * @param plugin Instance of the ZNPCsPlus plugin
-     * @param api Instance of the ZNPCsPlus entity property registry
+     * @param api    Instance of the ZNPCsPlus entity property registry
      */
     public static void register(Plugin plugin, EntityPropertyRegistry api) {
         NpcPropertyRegistryProvider.registry = api;

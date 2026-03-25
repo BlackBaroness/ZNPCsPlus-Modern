@@ -37,7 +37,8 @@ public class NameProperty extends EntityPropertyImpl<Component> {
             }
         }
 
-        if (legacySerialization) properties.put(3, newEntityData(3, EntityDataTypes.BYTE, (byte) (value != null ? 1 : 0)));
+        if (legacySerialization)
+            properties.put(3, newEntityData(3, EntityDataTypes.BYTE, (byte) (value != null ? 1 : 0)));
         else properties.put(3, newEntityData(3, EntityDataTypes.BOOLEAN, value != null));
     }
 }

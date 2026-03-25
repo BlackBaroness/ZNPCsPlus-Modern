@@ -22,15 +22,18 @@ public abstract class ReflectionLazyLoader<T> {
     protected ReflectionLazyLoader(List<String> possibleClassNames, boolean strict) {
         this.possibleClassNames = possibleClassNames;
         this.strict = strict;
-        for (String name : possibleClassNames) try {
-            reflectionClasses.add(Class.forName(name));
-        } catch (ClassNotFoundException ignored) {}
+        for (String name : possibleClassNames)
+            try {
+                reflectionClasses.add(Class.forName(name));
+            } catch (ClassNotFoundException ignored) {
+            }
     }
 
     public T get() {
         if (this.loaded) return this.cached;
         try {
-            if (this.reflectionClasses.size() == 0) throw new ClassNotFoundException("No class found: " + possibleClassNames);
+            if (this.reflectionClasses.size() == 0)
+                throw new ClassNotFoundException("No class found: " + possibleClassNames);
             T eval = (this.cached != null) ? this.cached : (this.cached = load());
             if (eval == null) throw new RuntimeException("Returned value is null");
         } catch (Throwable throwable) {
@@ -51,5 +54,7 @@ public abstract class ReflectionLazyLoader<T> {
     }
 
     protected abstract T load() throws Exception;
-    protected void printDebugInfo(Consumer<String> logger) {}
+
+    protected void printDebugInfo(Consumer<String> logger) {
+    }
 }

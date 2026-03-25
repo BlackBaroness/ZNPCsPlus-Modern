@@ -18,7 +18,7 @@ import lol.pyr.znpcsplus.util.NpcLocation;
 import lol.pyr.znpcsplus.util.Viewable;
 
 public class HologramItem extends HologramLine<ItemStack> {
-    public HologramItem(Viewable viewable,  EntityPropertyRegistryImpl propertyRegistry, PacketFactory packetFactory, NpcLocation location, ItemStack item) {
+    public HologramItem(Viewable viewable, EntityPropertyRegistryImpl propertyRegistry, PacketFactory packetFactory, NpcLocation location, ItemStack item) {
         super(viewable, item, packetFactory, EntityTypes.ITEM, location);
         addProperty(propertyRegistry.getByName("holo_item"));
     }

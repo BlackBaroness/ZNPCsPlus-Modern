@@ -21,7 +21,7 @@ public class NpcApiProvider {
      */
     public static NpcApi get() {
         if (api == null) throw new IllegalStateException(
-                "ZNPCsPlus plugin isn't enabled yet!\n" +
+            "ZNPCsPlus plugin isn't enabled yet!\n" +
                 "Please add it to your plugin.yml as a depend or softdepend."
         );
         return api;
@@ -32,7 +32,7 @@ public class NpcApiProvider {
      * You probably shouldn't call this method under any circumstances
      *
      * @param plugin Instance of the ZNPCsPlus plugin
-     * @param api Instance of the ZNPCsPlus api
+     * @param api    Instance of the ZNPCsPlus api
      */
     public static void register(Plugin plugin, NpcApi api) {
         NpcApiProvider.api = api;

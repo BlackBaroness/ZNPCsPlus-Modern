@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Represents an armor stand vehicle entity.
  * <p>
- *     This entity is used to make the NPC sit on an invisible armor stand.
+ * This entity is used to make the NPC sit on an invisible armor stand.
  * </p>
  */
 public class ArmorStandVehicleProperties implements PropertyHolder {

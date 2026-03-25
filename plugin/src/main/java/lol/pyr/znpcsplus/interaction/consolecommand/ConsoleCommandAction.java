@@ -25,27 +25,28 @@ public class ConsoleCommandAction extends InteractionActionImpl {
     @Override
     public void run(Player player) {
         String cmd = command.replace("{player}", player.getName()).replace("{uuid}", player.getUniqueId().toString());
-        if (!cmd.isEmpty()) scheduler.runSyncGlobal(() -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), PapiUtil.set(player, cmd)));
+        if (!cmd.isEmpty())
+            scheduler.runSyncGlobal(() -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), PapiUtil.set(player, cmd)));
     }
 
     @Override
     public Component getInfo(String id, int index, CommandContext context) {
         return Component.text(index + ") ", NamedTextColor.GOLD)
-                .append(Component.text("[EDIT]", NamedTextColor.DARK_GREEN)
-                        .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                Component.text("Click to edit this action", NamedTextColor.GRAY)))
-                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                                "/" + context.getLabel() + " action edit " + id + " " + index + " consolecommand " + getInteractionType().name() + " " + getCooldown()/1000 + " " + getDelay() + " " + command))
+            .append(Component.text("[EDIT]", NamedTextColor.DARK_GREEN)
+                .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
+                    Component.text("Click to edit this action", NamedTextColor.GRAY)))
+                .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+                    "/" + context.getLabel() + " action edit " + id + " " + index + " consolecommand " + getInteractionType().name() + " " + getCooldown() / 1000 + " " + getDelay() + " " + command))
                 .append(Component.text(" | ", NamedTextColor.GRAY))
                 .append(Component.text("[DELETE]", NamedTextColor.RED)
-                        .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                Component.text("Click to delete this action", NamedTextColor.GRAY)))
-                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                                "/" + context.getLabel() + " action delete " + id + " " + index)))
+                    .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        Component.text("Click to delete this action", NamedTextColor.GRAY)))
+                    .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+                        "/" + context.getLabel() + " action delete " + id + " " + index)))
                 .append(Component.text(" | ", NamedTextColor.GRAY))
                 .append(Component.text("Console Command: ", NamedTextColor.GREEN)
-                        .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                Component.text("Click Type: " + getInteractionType().name() + " Cooldown: " + getCooldown()/1000 + " Delay: " + getDelay(), NamedTextColor.GRAY))))
+                    .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        Component.text("Click Type: " + getInteractionType().name() + " Cooldown: " + getCooldown() / 1000 + " Delay: " + getDelay(), NamedTextColor.GRAY))))
                 .append(Component.text(command, NamedTextColor.WHITE)));
     }
 

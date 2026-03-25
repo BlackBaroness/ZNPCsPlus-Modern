@@ -17,9 +17,9 @@ public class Vector3fParser extends ParserType<Vector3f> {
     public Vector3f parse(Deque<String> deque) throws CommandExecutionException {
         try {
             return new Vector3f(
-                    Float.parseFloat(deque.pop()),
-                    Float.parseFloat(deque.pop()),
-                    Float.parseFloat(deque.pop()));
+                Float.parseFloat(deque.pop()),
+                Float.parseFloat(deque.pop()),
+                Float.parseFloat(deque.pop()));
         } catch (NumberFormatException e) {
             throw new CommandExecutionException();
         }

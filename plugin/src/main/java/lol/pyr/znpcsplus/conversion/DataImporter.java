@@ -6,5 +6,6 @@ import java.util.Collection;
 
 public interface DataImporter {
     Collection<NpcEntryImpl> importData();
+
     boolean isValid();
 }

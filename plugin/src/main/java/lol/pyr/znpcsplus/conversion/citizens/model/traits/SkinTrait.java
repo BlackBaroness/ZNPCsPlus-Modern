@@ -21,7 +21,8 @@ public class SkinTrait extends SectionCitizensTrait {
     public @NotNull NpcImpl apply(NpcImpl npc, ConfigurationSection section) {
         String texture = section.getString("textureRaw");
         String signature = section.getString("signature");
-        if (texture != null && signature != null) npc.setProperty(registry.getByName("skin", SkinDescriptor.class), new PrefetchedDescriptor(new SkinImpl(texture, signature)));
+        if (texture != null && signature != null)
+            npc.setProperty(registry.getByName("skin", SkinDescriptor.class), new PrefetchedDescriptor(new SkinImpl(texture, signature)));
         return npc;
     }
 }

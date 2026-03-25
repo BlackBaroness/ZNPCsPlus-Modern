@@ -27,8 +27,8 @@ public class HoloInfoCommand implements CommandHandler {
         Component component = Component.text("NPC Hologram Info of ID " + entry.getId() + ":", NamedTextColor.GREEN).appendNewline();
         for (int i = 0; i < hologram.getLines().size(); i++) {
             component = component.append(Component.text(i + ") ", NamedTextColor.GREEN))
-                    .append(Component.text(hologram.getLine(i), NamedTextColor.WHITE))
-                    .appendNewline();
+                .append(Component.text(hologram.getLine(i), NamedTextColor.WHITE))
+                .appendNewline();
         }
         context.send(component);
     }

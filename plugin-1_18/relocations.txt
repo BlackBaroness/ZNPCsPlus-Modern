@@ -7,8 +7,8 @@ lol.pyr.director.common.command
 lol.pyr.director.common.message
 lol.pyr.director.common.parse
 lol.pyr.director.common.util
-net.kyori.adventure.text.serializer.craftbukkit
 net.kyori.adventure.platform
+net.kyori.adventure.text.serializer.craftbukkit
 org.bstats
 org.yaml.snakeyaml
 space.arim.dazzleconf

@@ -25,7 +25,8 @@ public class HoloDeleteCommand implements CommandHandler {
         context.setUsage(context.getLabel() + " holo delete <id> <line>");
         HologramImpl hologram = context.parse(NpcEntryImpl.class).getNpc().getHologram();
         int line = context.parse(Integer.class);
-        if (line < 0 || line >= hologram.getLines().size()) context.halt(Component.text("Invalid line number!", NamedTextColor.RED));
+        if (line < 0 || line >= hologram.getLines().size())
+            context.halt(Component.text("Invalid line number!", NamedTextColor.RED));
         hologram.removeLine(line);
         context.send(Component.text("NPC line removed.", NamedTextColor.GREEN));
     }
@@ -34,8 +35,8 @@ public class HoloDeleteCommand implements CommandHandler {
     public List<String> suggest(CommandContext context) throws CommandExecutionException {
         if (context.argSize() == 1) return context.suggestCollection(npcRegistry.getModifiableIds());
         if (context.argSize() == 2) return context.suggestStream(Stream.iterate(0, n -> n + 1)
-                .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getHologram().getLines().size())
-                .map(String::valueOf));
+            .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getHologram().getLines().size())
+            .map(String::valueOf));
         return Collections.emptyList();
     }
 }

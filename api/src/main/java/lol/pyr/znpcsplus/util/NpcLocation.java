@@ -123,10 +123,10 @@ public class NpcLocation {
         if (o == null || getClass() != o.getClass()) return false;
         NpcLocation that = (NpcLocation) o;
         return Double.compare(that.x, x) == 0 &&
-                Double.compare(that.y, y) == 0 &&
-                Double.compare(that.z, z) == 0 &&
-                Float.compare(that.yaw, yaw) == 0 &&
-                Float.compare(that.pitch, pitch) == 0;
+            Double.compare(that.y, y) == 0 &&
+            Double.compare(that.z, z) == 0 &&
+            Float.compare(that.yaw, yaw) == 0 &&
+            Float.compare(that.pitch, pitch) == 0;
     }
 
     @Override

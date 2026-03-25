@@ -4,7 +4,11 @@ plugins {
 
 rootProject.name = "ZNPCsPlus-Modern"
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(
     "api",
-    "plugin"
+    "plugin",
+    "plugin-1_16",
+    "plugin-1_18",
 )

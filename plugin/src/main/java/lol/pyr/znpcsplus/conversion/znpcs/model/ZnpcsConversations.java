@@ -11,12 +11,15 @@ public class ZnpcsConversations {
     public String getName() {
         return name;
     }
+
     public ZNpcsConversationText[] getTexts() {
         return texts;
     }
+
     public int getRadius() {
         return radius;
     }
+
     public int getDelay() {
         return delay;
     }

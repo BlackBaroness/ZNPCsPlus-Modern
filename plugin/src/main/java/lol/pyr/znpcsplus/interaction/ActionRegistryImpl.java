@@ -1,6 +1,8 @@
 package lol.pyr.znpcsplus.interaction;
 
-import lol.pyr.znpcsplus.api.interaction.*;
+import lol.pyr.znpcsplus.api.interaction.ActionRegistry;
+import lol.pyr.znpcsplus.api.interaction.InteractionAction;
+import lol.pyr.znpcsplus.api.interaction.InteractionActionType;
 import lol.pyr.znpcsplus.interaction.consolecommand.ConsoleCommandActionType;
 import lol.pyr.znpcsplus.interaction.message.MessageActionType;
 import lol.pyr.znpcsplus.interaction.playerchat.PlayerChatActionType;
@@ -38,9 +40,9 @@ public class ActionRegistryImpl implements ActionRegistry {
 
     public List<InteractionCommandHandler> getCommands() {
         return serializerMap.values().stream()
-                .filter(type -> type instanceof InteractionCommandHandler)
-                .map(type -> (InteractionCommandHandler) type)
-                .collect(Collectors.toList());
+            .filter(type -> type instanceof InteractionCommandHandler)
+            .map(type -> (InteractionCommandHandler) type)
+            .collect(Collectors.toList());
     }
 
     @SuppressWarnings("unchecked")

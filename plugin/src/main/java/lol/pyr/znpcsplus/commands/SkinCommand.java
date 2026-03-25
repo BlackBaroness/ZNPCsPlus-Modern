@@ -11,8 +11,8 @@ import lol.pyr.znpcsplus.npc.NpcImpl;
 import lol.pyr.znpcsplus.npc.NpcRegistryImpl;
 import lol.pyr.znpcsplus.npc.NpcTypeRegistryImpl;
 import lol.pyr.znpcsplus.skin.cache.MojangSkinCache;
-import lol.pyr.znpcsplus.skin.descriptor.NameFetchingDescriptor;
 import lol.pyr.znpcsplus.skin.descriptor.MirrorDescriptor;
+import lol.pyr.znpcsplus.skin.descriptor.NameFetchingDescriptor;
 import lol.pyr.znpcsplus.skin.descriptor.PrefetchedDescriptor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -43,7 +43,8 @@ public class SkinCommand implements CommandHandler {
     public void run(CommandContext context) throws CommandExecutionException {
         context.setUsage(context.getLabel() + " skin <id> <type> [value]");
         NpcImpl npc = context.parse(NpcEntryImpl.class).getNpc();
-        if (npc.getType() != typeRegistry.getByEntityType(EntityTypes.PLAYER)) context.halt(Component.text("The NPC must be a player to have a skin", NamedTextColor.RED));
+        if (npc.getType() != typeRegistry.getByEntityType(EntityTypes.PLAYER))
+            context.halt(Component.text("The NPC must be a player to have a skin", NamedTextColor.RED));
         String type = context.popString();
 
         if (type.equalsIgnoreCase("mirror")) {
@@ -81,7 +82,7 @@ public class SkinCommand implements CommandHandler {
             try {
                 URL url = new URL(urlString);
                 context.send(Component.text("Fetching skin from url \"" + urlString + "\"...", NamedTextColor.GREEN));
-                PrefetchedDescriptor.fromUrl(skinCache, url , variant).thenAccept(skin -> {
+                PrefetchedDescriptor.fromUrl(skinCache, url, variant).thenAccept(skin -> {
                     if (skin.getSkin() == null) {
                         context.send(Component.text("Failed to fetch skin, are you sure the url is valid?", NamedTextColor.RED));
                         return;

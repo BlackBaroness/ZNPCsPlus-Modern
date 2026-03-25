@@ -1,7 +1,7 @@
 package lol.pyr.znpcsplus.reflection.types;
 
-import lol.pyr.znpcsplus.reflection.ReflectionLazyLoader;
 import lol.pyr.znpcsplus.reflection.ReflectionBuilder;
+import lol.pyr.znpcsplus.reflection.ReflectionLazyLoader;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -35,15 +35,17 @@ public class FieldReflection extends ReflectionLazyLoader<Field> {
             if (expectType != null && !field.getType().equals(expectType)) return null;
             field.setAccessible(true);
             return field;
-        } catch (NoSuchFieldException ignored) {}
+        } catch (NoSuchFieldException ignored) {
+        }
         return null;
     }
 
     private Field loadByType(Class<?> clazz) {
-        for (Field field : clazz.getDeclaredFields()) if (field.getType() == expectType) {
-            field.setAccessible(true);
-            return field;
-        }
+        for (Field field : clazz.getDeclaredFields())
+            if (field.getType() == expectType) {
+                field.setAccessible(true);
+                return field;
+            }
         return null;
     }
 

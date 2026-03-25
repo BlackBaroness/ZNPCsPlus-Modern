@@ -1,4 +1,4 @@
-package lol.pyr.znpcsplus;
+package io.github.blackbaroness.znpcplusmodern;
 
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.audience.Audience;

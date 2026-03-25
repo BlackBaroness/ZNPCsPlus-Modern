@@ -2,6 +2,7 @@ package lol.pyr.znpcsplus.api.entity;
 
 /**
  * Class that represents a unique property
+ *
  * @param <T> The type of the value of this property
  */
 public interface EntityProperty<T> {

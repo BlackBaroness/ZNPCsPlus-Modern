@@ -30,7 +30,7 @@ public class InteractionPacketListener implements PacketListener {
     private final NpcTypeRegistryImpl typeRegistry;
     private final TaskScheduler scheduler;
 
-    public InteractionPacketListener(UserManager userManager, NpcRegistryImpl npcRegistry, NpcTypeRegistryImpl typeRegistry,  TaskScheduler scheduler) {
+    public InteractionPacketListener(UserManager userManager, NpcRegistryImpl npcRegistry, NpcTypeRegistryImpl typeRegistry, TaskScheduler scheduler) {
         this.userManager = userManager;
         this.npcRegistry = npcRegistry;
         this.typeRegistry = typeRegistry;
@@ -50,11 +50,11 @@ public class InteractionPacketListener implements PacketListener {
         NpcImpl npc = entry.getNpc();
 
         if ((packet.getAction().equals(WrapperPlayClientInteractEntity.InteractAction.INTERACT)
-                || packet.getAction().equals(WrapperPlayClientInteractEntity.InteractAction.INTERACT_AT))
-                && npc.getType().equals(typeRegistry.getByName("allay"))) {
+            || packet.getAction().equals(WrapperPlayClientInteractEntity.InteractAction.INTERACT_AT))
+            && npc.getType().equals(typeRegistry.getByName("allay"))) {
             PacketEvents.getAPI().getPlayerManager().sendPacket(player,
-                    new WrapperPlayServerEntityEquipment(packet.getEntityId(), Collections.singletonList(
-                            new Equipment(EquipmentSlot.MAIN_HAND, ItemStack.EMPTY))));
+                new WrapperPlayServerEntityEquipment(packet.getEntityId(), Collections.singletonList(
+                    new Equipment(EquipmentSlot.MAIN_HAND, ItemStack.EMPTY))));
             player.updateInventory();
         }
 
@@ -68,7 +68,8 @@ public class InteractionPacketListener implements PacketListener {
         if (interactEvent.isCancelled()) return;
 
         for (InteractionAction action : npc.getActions()) {
-            if (action.getInteractionType() != InteractionType.ANY_CLICK && action.getInteractionType() != type) continue;
+            if (action.getInteractionType() != InteractionType.ANY_CLICK && action.getInteractionType() != type)
+                continue;
             if (action.getCooldown() > 0 && !user.actionCooldownCheck(action)) continue;
             scheduler.runLaterAsync(() -> action.run(player), action.getDelay());
         }

@@ -23,7 +23,8 @@ public class ChangeIdCommand implements CommandHandler {
         context.setUsage(context.getLabel() + " changeid <old> <new>");
         NpcEntryImpl old = context.parse(NpcEntryImpl.class);
         String newId = context.popString();
-        if (npcRegistry.getById(newId) != null) context.halt(Component.text("There is already an npc with the new id you have provided", NamedTextColor.RED));
+        if (npcRegistry.getById(newId) != null)
+            context.halt(Component.text("There is already an npc with the new id you have provided", NamedTextColor.RED));
         npcRegistry.switchIds(old.getId(), newId);
         context.send(Component.text("Npc's id changed to " + newId.toLowerCase(), NamedTextColor.GREEN));
     }

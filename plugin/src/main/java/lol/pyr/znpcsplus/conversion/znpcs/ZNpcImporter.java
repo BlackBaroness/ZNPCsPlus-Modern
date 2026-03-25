@@ -25,8 +25,8 @@ import lol.pyr.znpcsplus.packets.PacketFactory;
 import lol.pyr.znpcsplus.scheduling.TaskScheduler;
 import lol.pyr.znpcsplus.skin.SkinImpl;
 import lol.pyr.znpcsplus.skin.cache.MojangSkinCache;
-import lol.pyr.znpcsplus.skin.descriptor.NameFetchingDescriptor;
 import lol.pyr.znpcsplus.skin.descriptor.MirrorDescriptor;
+import lol.pyr.znpcsplus.skin.descriptor.NameFetchingDescriptor;
 import lol.pyr.znpcsplus.skin.descriptor.PrefetchedDescriptor;
 import lol.pyr.znpcsplus.util.BungeeConnector;
 import lol.pyr.znpcsplus.util.ItemSerializationUtil;
@@ -74,7 +74,7 @@ public class ZNpcImporter implements DataImporter {
         this.conversationFile = new File(dataFile.getParentFile(), "conversations.json");
         this.bungeeConnector = bungeeConnector;
         gson = new GsonBuilder()
-                .create();
+            .create();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class ZNpcImporter implements DataImporter {
                         int totalDelay = 0;
 
                         // Loop through all texts in the conversation
-                        for(ZNpcsConversationText text : conv.getTexts()) {
+                        for (ZNpcsConversationText text : conv.getTexts()) {
 
                             // Add the delay in ticks to the total delay
                             totalDelay += text.getDelay() * 20;
@@ -176,8 +176,7 @@ public class ZNpcImporter implements DataImporter {
 
             if (model.getSkinName() != null) {
                 npc.setProperty(propertyRegistry.getByName("skin", SkinDescriptor.class), new NameFetchingDescriptor(skinCache, model.getSkinName()));
-            }
-            else if (model.getSkin() != null && model.getSignature() != null) {
+            } else if (model.getSkin() != null && model.getSignature() != null) {
                 npc.setProperty(propertyRegistry.getByName("skin", SkinDescriptor.class), new PrefetchedDescriptor(new SkinImpl(model.getSkin(), model.getSignature())));
             }
 

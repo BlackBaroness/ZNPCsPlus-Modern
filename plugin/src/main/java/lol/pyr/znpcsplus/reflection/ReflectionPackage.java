@@ -27,9 +27,9 @@ public class ReflectionPackage {
 
     public static String joinWithDot(String... parts) {
         return Arrays.stream(parts)
-                .filter(Objects::nonNull)
-                .filter(p -> !p.isEmpty())
-                .collect(Collectors.joining("."));
+            .filter(Objects::nonNull)
+            .filter(p -> !p.isEmpty())
+            .collect(Collectors.joining("."));
     }
 
     private static String generateVersion() {

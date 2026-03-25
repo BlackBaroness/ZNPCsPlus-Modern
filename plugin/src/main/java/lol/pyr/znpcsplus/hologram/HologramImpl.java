@@ -1,6 +1,7 @@
 package lol.pyr.znpcsplus.hologram;
 
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
+import io.github.blackbaroness.znpcplusmodern.MiniMessageProvider;
 import io.github.retrooper.packetevents.util.SpigotConversionUtil;
 import lol.pyr.znpcsplus.api.hologram.Hologram;
 import lol.pyr.znpcsplus.config.ConfigManager;
@@ -10,7 +11,6 @@ import lol.pyr.znpcsplus.util.FutureUtil;
 import lol.pyr.znpcsplus.util.NpcLocation;
 import lol.pyr.znpcsplus.util.Viewable;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 
@@ -48,7 +48,7 @@ public class HologramImpl extends Viewable implements Hologram {
     }
 
     public void addTextLine(String line) {
-        Component component = line.contains("§") ? Component.text(line) : MiniMessage.miniMessage().deserialize(line);
+        Component component = line.contains("§") ? Component.text(line) : MiniMessageProvider.get().deserialize(line);
         addTextLineComponent(textSerializer.deserialize(textSerializer.serialize(component)));
     }
 
@@ -110,7 +110,7 @@ public class HologramImpl extends Viewable implements Hologram {
     }
 
     public void insertTextLine(int index, String line) {
-        insertTextLineComponent(index, textSerializer.deserialize(textSerializer.serialize(MiniMessage.miniMessage().deserialize(line))));
+        insertTextLineComponent(index, textSerializer.deserialize(textSerializer.serialize(MiniMessageProvider.get().deserialize(line))));
     }
 
     public void insertItemLineStack(int index, org.bukkit.inventory.ItemStack item) {
@@ -144,8 +144,8 @@ public class HologramImpl extends Viewable implements Hologram {
     @Override
     protected CompletableFuture<Void> UNSAFE_show(Player player) {
         return FutureUtil.allOf(lines.stream()
-                .map(line -> line.show(player))
-                .collect(Collectors.toList()));
+            .map(line -> line.show(player))
+            .collect(Collectors.toList()));
     }
 
     @Override

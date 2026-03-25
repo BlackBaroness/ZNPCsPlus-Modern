@@ -30,13 +30,13 @@ public class DataImporterRegistry {
                                 MojangSkinCache skinCache, NpcRegistryImpl npcRegistry, BungeeConnector bungeeConnector) {
 
         register("znpcs", LazyLoader.of(() -> new ZNpcImporter(configManager, adventure, taskScheduler,
-                packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "ServersNPC/data.json"), bungeeConnector)));
+            packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "ServersNPC/data.json"), bungeeConnector)));
         register("znpcsplus_legacy", LazyLoader.of(() -> new ZNpcImporter(configManager, adventure, taskScheduler,
-                packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "ZNPCsPlusLegacy/data.json"), bungeeConnector)));
+            packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "ZNPCsPlusLegacy/data.json"), bungeeConnector)));
         register("citizens", LazyLoader.of(() -> new CitizensImporter(configManager, adventure, taskScheduler,
-                packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "Citizens/saves.yml"), npcRegistry)));
+            packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "Citizens/saves.yml"), npcRegistry)));
         register("fancynpcs", LazyLoader.of(() -> new FancyNpcsImporter(configManager, adventure, taskScheduler,
-                packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "FancyNpcs/npcs.yml"), npcRegistry)));
+            packetFactory, textSerializer, typeRegistry, propertyRegistry, skinCache, new File(pluginsFolder, "FancyNpcs/npcs.yml"), npcRegistry)));
     }
 
     private void register(String id, LazyLoader<DataImporter> loader) {

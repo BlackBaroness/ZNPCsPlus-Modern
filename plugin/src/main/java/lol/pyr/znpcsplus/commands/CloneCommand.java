@@ -3,9 +3,7 @@ package lol.pyr.znpcsplus.commands;
 import lol.pyr.director.adventure.command.CommandContext;
 import lol.pyr.director.adventure.command.CommandHandler;
 import lol.pyr.director.common.command.CommandExecutionException;
-import lol.pyr.znpcsplus.npc.NpcEntryImpl;
 import lol.pyr.znpcsplus.npc.NpcRegistryImpl;
-import lol.pyr.znpcsplus.npc.NpcTypeRegistryImpl;
 import lol.pyr.znpcsplus.util.NpcLocation;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -22,14 +20,16 @@ public class CloneCommand implements CommandHandler {
     }
 
     @Override
-    public void run(CommandContext context) throws  CommandExecutionException {
+    public void run(CommandContext context) throws CommandExecutionException {
         context.setUsage(context.getLabel() + " clone <id> <new id>");
         Player player = context.ensureSenderIsPlayer();
 
         String id = context.popString();
-        if (npcRegistry.getById(id) == null) context.halt(Component.text("NPC with ID " + id + " does not exist.", NamedTextColor.RED));
+        if (npcRegistry.getById(id) == null)
+            context.halt(Component.text("NPC with ID " + id + " does not exist.", NamedTextColor.RED));
         String newId = context.popString();
-        if (npcRegistry.getById(newId) != null) context.halt(Component.text("NPC with ID " + newId + " already exists.", NamedTextColor.RED));
+        if (npcRegistry.getById(newId) != null)
+            context.halt(Component.text("NPC with ID " + newId + " already exists.", NamedTextColor.RED));
 
         npcRegistry.clone(id, newId, player.getWorld(), new NpcLocation(player.getLocation()));
 

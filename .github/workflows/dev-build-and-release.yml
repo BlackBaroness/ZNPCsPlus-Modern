@@ -36,6 +36,12 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}-build.${{ github.run_number }}
-          name: 'ZNPCsPlus-Modern ${{ github.ref_name }} build #${{ github.run_number }}'
+          name: 'Build #${{ github.run_number }}'
           generate_release_notes: true
-          files: plugin/build/libs/ZNPCsPlus-Modern.jar
+          body: |
+            ❓ What file to choose?
+            - For 1.16.* or 1.17.*, pick ZNPCsPlus-Modern-1_16.jar
+            - For 1.18.* or higher, pick ZNPCsPlus-Modern-1_18.jar
+          files: |
+            plugin-1_16/build/libs/ZNPCsPlus-Modern-1_16.jar
+            plugin-1_18/build/libs/ZNPCsPlus-Modern-1_18.jar

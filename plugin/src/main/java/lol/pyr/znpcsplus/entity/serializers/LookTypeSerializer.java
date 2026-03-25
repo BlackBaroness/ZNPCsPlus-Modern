@@ -13,7 +13,7 @@ public class LookTypeSerializer implements PropertySerializer<LookType> {
     public LookType deserialize(String property) {
         if (property.equals("true")) return LookType.CLOSEST_PLAYER;
         try {
-             return LookType.valueOf(property);
+            return LookType.valueOf(property);
         } catch (IllegalArgumentException ignored) {
             return LookType.FIXED;
         }

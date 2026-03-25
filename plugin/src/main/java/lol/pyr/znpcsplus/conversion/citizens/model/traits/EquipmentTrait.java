@@ -68,7 +68,7 @@ public class EquipmentTrait extends SectionCitizensTrait {
             return null;
         }
         org.bukkit.inventory.ItemStack itemStack = new org.bukkit.inventory.ItemStack(material, section.getInt("amount", 1),
-                (short) section.getInt("durability", section.getInt("data", 0)));
+            (short) section.getInt("durability", section.getInt("data", 0)));
         if (section.isInt("mdata")) {
             //noinspection deprecation
             itemStack.getData().setData((byte) section.getInt("mdata"));

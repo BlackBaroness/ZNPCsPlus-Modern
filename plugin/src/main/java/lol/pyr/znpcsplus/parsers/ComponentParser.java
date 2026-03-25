@@ -1,11 +1,11 @@
 package lol.pyr.znpcsplus.parsers;
 
+import io.github.blackbaroness.znpcplusmodern.MiniMessageProvider;
 import lol.pyr.director.adventure.command.CommandContext;
 import lol.pyr.director.adventure.parse.ParserType;
 import lol.pyr.director.common.command.CommandExecutionException;
 import lol.pyr.director.common.message.Message;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 import java.util.Deque;
@@ -21,7 +21,7 @@ public class ComponentParser extends ParserType<Component> {
     @Override
     public Component parse(Deque<String> deque) throws CommandExecutionException {
         String line = String.join(" ", deque);
-        Component component = line.contains("§") ? Component.text(line) : MiniMessage.miniMessage().deserialize(line);
+        Component component = line.contains("§") ? Component.text(line) : MiniMessageProvider.get().deserialize(line);
         return textSerializer.deserialize(textSerializer.serialize(component));
     }
 }

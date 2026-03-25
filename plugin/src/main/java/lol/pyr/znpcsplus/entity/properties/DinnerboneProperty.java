@@ -21,7 +21,7 @@ public class DinnerboneProperty extends EntityPropertyImpl<Boolean> {
         this.optional = optional;
         Component name = Component.text("Dinnerbone");
         this.serialized = legacy ? AdventureSerializer.serializer().legacy().serialize(name) :
-                optional ? name : LegacyComponentSerializer.legacySection().serialize(name);
+            optional ? name : LegacyComponentSerializer.legacySection().serialize(name);
     }
 
     @Override

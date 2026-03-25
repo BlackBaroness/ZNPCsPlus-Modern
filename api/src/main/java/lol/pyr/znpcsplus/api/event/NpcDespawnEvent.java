@@ -15,7 +15,7 @@ public class NpcDespawnEvent extends CancellableNpcEvent implements Cancellable 
 
     /**
      * @param player The player involved in the event
-     * @param entry The NPC entry involved in the event
+     * @param entry  The NPC entry involved in the event
      */
     public NpcDespawnEvent(Player player, NpcEntry entry) {
         super(player, entry);

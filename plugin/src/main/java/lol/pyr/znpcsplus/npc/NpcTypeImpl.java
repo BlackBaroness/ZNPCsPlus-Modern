@@ -127,10 +127,10 @@ public class NpcTypeImpl implements NpcType {
         public NpcTypeImpl build() {
             ServerVersion version = PacketEvents.getAPI().getServerManager().getVersion();
             addProperties("fire", "invisible", "silent", "look", "look_distance", "look_return", "view_distance",
-                    "potion_color", "potion_ambient", "display_name", "permission_required", "premission_required_perm",
-                    "player_knockback", "player_knockback_exempt_permission", "player_knockback_distance", "player_knockback_vertical",
-                    "player_knockback_horizontal", "player_knockback_cooldown", "player_knockback_sound", "player_knockback_sound_name",
-                    "player_knockback_sound_volume", "player_knockback_sound_pitch");
+                "potion_color", "potion_ambient", "display_name", "permission_required", "premission_required_perm",
+                "player_knockback", "player_knockback_exempt_permission", "player_knockback_distance", "player_knockback_vertical",
+                "player_knockback_horizontal", "player_knockback_cooldown", "player_knockback_sound", "player_knockback_sound_name",
+                "player_knockback_sound_volume", "player_knockback_sound_pitch");
             if (!type.equals(EntityTypes.PLAYER)) addProperties("dinnerbone");
             if (EntityTypes.isTypeInstanceOf(type, EntityTypes.LIVINGENTITY)) {
                 addProperties("health", "attribute_max_health");
@@ -183,7 +183,7 @@ public class NpcTypeImpl implements NpcType {
                 }
             }
             if (EntityTypes.isTypeInstanceOf(type, EntityTypes.ABSTRACT_TAMEABLE_ANIMAL) &&
-                    !(version.isNewerThanOrEquals(ServerVersion.V_1_14) && type.equals(EntityTypes.OCELOT))) {
+                !(version.isNewerThanOrEquals(ServerVersion.V_1_14) && type.equals(EntityTypes.OCELOT))) {
                 addProperties("tamed", "sitting");
             }
             if (EntityTypes.isTypeInstanceOf(type, EntityTypes.GUARDIAN)) {

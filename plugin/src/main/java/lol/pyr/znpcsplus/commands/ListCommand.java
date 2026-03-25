@@ -24,14 +24,14 @@ public class ListCommand implements CommandHandler {
             NpcImpl npc = npcRegistry.getById(id).getNpc();
             NpcLocation location = npc.getLocation();
             component = component.append(Component.text("ID: " + id, npc.isEnabled() ? NamedTextColor.GREEN : NamedTextColor.RED))
-                    .append(Component.text(" | ", NamedTextColor.GRAY))
-                    .append(Component.text("Type: ", NamedTextColor.GREEN))
-                    .append(Component.text(npc.getType().getName(), NamedTextColor.GREEN))
-                    .append(Component.text(" | ", NamedTextColor.GRAY))
-                    .append(Component.text("Location: " + npc.getWorldName() + " X:" + location.getBlockX() + " Y:" + location.getBlockY() + " Z:" + location.getBlockZ(), NamedTextColor.GREEN))
-                    .append(Component.text(" | ", NamedTextColor.GRAY))
-                    .append(Component.text("[TELEPORT]", NamedTextColor.DARK_GREEN).clickEvent(ClickEvent.runCommand("/znpcs teleport " + id)))
-                    .appendNewline();
+                .append(Component.text(" | ", NamedTextColor.GRAY))
+                .append(Component.text("Type: ", NamedTextColor.GREEN))
+                .append(Component.text(npc.getType().getName(), NamedTextColor.GREEN))
+                .append(Component.text(" | ", NamedTextColor.GRAY))
+                .append(Component.text("Location: " + npc.getWorldName() + " X:" + location.getBlockX() + " Y:" + location.getBlockY() + " Z:" + location.getBlockZ(), NamedTextColor.GREEN))
+                .append(Component.text(" | ", NamedTextColor.GRAY))
+                .append(Component.text("[TELEPORT]", NamedTextColor.DARK_GREEN).clickEvent(ClickEvent.runCommand("/znpcs teleport " + id)))
+                .appendNewline();
         }
         context.send(component);
     }

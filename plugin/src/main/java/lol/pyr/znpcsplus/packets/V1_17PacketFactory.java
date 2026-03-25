@@ -26,9 +26,10 @@ public class V1_17PacketFactory extends V1_8PacketFactory {
     public void spawnEntity(Player player, PacketEntity entity, PropertyHolder properties) {
         NpcLocation location = entity.getLocation();
         sendPacket(player, new WrapperPlayServerSpawnEntity(entity.getEntityId(), Optional.of(entity.getUuid()), entity.getType(),
-                npcLocationToVector(location), location.getPitch(), location.getYaw(), location.getYaw(), 0, Optional.of(new Vector3d())));
+            npcLocationToVector(location), location.getPitch(), location.getYaw(), location.getYaw(), 0, Optional.of(new Vector3d())));
         sendAllMetadata(player, entity, properties);
-        if (EntityTypes.isTypeInstanceOf(entity.getType(), EntityTypes.LIVINGENTITY)) sendAllAttributes(player, entity, properties);
+        if (EntityTypes.isTypeInstanceOf(entity.getType(), EntityTypes.LIVINGENTITY))
+            sendAllAttributes(player, entity, properties);
         createTeam(player, entity, properties.getProperty(propertyRegistry.getByName("glow", NamedColor.class)));
     }
 }

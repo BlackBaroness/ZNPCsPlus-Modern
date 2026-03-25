@@ -26,9 +26,10 @@ public class MethodReflection extends ReflectionLazyLoader<Method> {
             Method method = load(clazz, imperfectMatches);
             if (method != null) return method;
         }
-        for (int i = 2; i > 0; i--) if (imperfectMatches.containsKey(i)) {
-            return imperfectMatches.get(i).get(0);
-        }
+        for (int i = 2; i > 0; i--)
+            if (imperfectMatches.containsKey(i)) {
+                return imperfectMatches.get(i).get(0);
+            }
         return null;
     }
 
@@ -39,9 +40,10 @@ public class MethodReflection extends ReflectionLazyLoader<Method> {
                 if (!method.getReturnType().equals(expectType)) continue;
                 matches++;
             }
-            if (parameterTypes.size() > 0) out: for (Class<?>[] possible : parameterTypes) {
+            if (parameterTypes.size() > 0) out:for (Class<?>[] possible : parameterTypes) {
                 if (method.getParameterCount() != possible.length) continue;
-                for (int i = 0; i < possible.length; i++) if (!method.getParameterTypes()[i].equals(possible[i])) continue out;
+                for (int i = 0; i < possible.length; i++)
+                    if (!method.getParameterTypes()[i].equals(possible[i])) continue out;
                 matches++;
             }
             if (methods.contains(method.getName())) {

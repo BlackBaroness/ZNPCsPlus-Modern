@@ -27,7 +27,7 @@ public class EntitySittingProperty extends EntityPropertyImpl<Boolean> {
         if (sitting) {
             if (entity.getVehicle() == null) {
                 PacketEntity vehiclePacketEntity = new PacketEntity(packetFactory, new ArmorStandVehicleProperties(propertyRegistry),
-                        entity.getViewable(), EntityTypes.ARMOR_STAND, entity.getLocation().withY(entity.getLocation().getY() - 0.9));
+                    entity.getViewable(), EntityTypes.ARMOR_STAND, entity.getLocation().withY(entity.getLocation().getY() - 0.9));
                 entity.setVehicle(vehiclePacketEntity);
             }
         } else if (entity.getVehicle() != null) {

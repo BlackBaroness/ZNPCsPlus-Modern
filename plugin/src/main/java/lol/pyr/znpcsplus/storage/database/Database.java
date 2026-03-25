@@ -6,7 +6,8 @@ import java.util.logging.Logger;
 public abstract class Database {
     protected final Logger logger;
     protected Connection connection;
-    public Database(Logger logger){
+
+    public Database(Logger logger) {
         this.logger = logger;
     }
 

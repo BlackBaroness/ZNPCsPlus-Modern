@@ -11,18 +11,21 @@ import java.util.Set;
 public interface NpcType {
     /**
      * The name of the NPC type.
+     *
      * @return The name of the NPC type.
      */
     String getName();
 
     /**
      * The offset of the hologram above the NPC.
+     *
      * @return the offset
      */
     double getHologramOffset();
 
     /**
      * Set of properties that are allowed to be set on the NPC.
+     *
      * @return allowed properties
      */
     Set<EntityProperty<?>> getAllowedProperties();

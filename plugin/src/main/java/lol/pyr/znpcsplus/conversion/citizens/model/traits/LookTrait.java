@@ -17,7 +17,8 @@ public class LookTrait extends SectionCitizensTrait {
 
     @Override
     public @NotNull NpcImpl apply(NpcImpl npc, ConfigurationSection section) {
-        if (section.getBoolean("enabled")) npc.setProperty(registry.getByName("look", LookType.class), LookType.CLOSEST_PLAYER);
+        if (section.getBoolean("enabled"))
+            npc.setProperty(registry.getByName("look", LookType.class), LookType.CLOSEST_PLAYER);
         return npc;
     }
 }

@@ -43,9 +43,9 @@ public class FancyNpcsImporter implements DataImporter {
     private final NpcRegistryImpl npcRegistry;
 
     public FancyNpcsImporter(ConfigManager configManager, BukkitAudiences adventure,
-                            TaskScheduler taskScheduler, PacketFactory packetFactory, LegacyComponentSerializer textSerializer,
-                            NpcTypeRegistryImpl typeRegistry, EntityPropertyRegistryImpl propertyRegistry, MojangSkinCache skinCache,
-                            File dataFile, NpcRegistryImpl npcRegistry) {
+                             TaskScheduler taskScheduler, PacketFactory packetFactory, LegacyComponentSerializer textSerializer,
+                             NpcTypeRegistryImpl typeRegistry, EntityPropertyRegistryImpl propertyRegistry, MojangSkinCache skinCache,
+                             File dataFile, NpcRegistryImpl npcRegistry) {
         this.configManager = configManager;
         this.adventure = adventure;
         this.scheduler = taskScheduler;
@@ -78,11 +78,11 @@ public class FancyNpcsImporter implements DataImporter {
                 world = Bukkit.getWorlds().get(0).getName();
             }
             NpcLocation location = new NpcLocation(
-                    npcSection.getDouble("location.x"),
-                    npcSection.getDouble("location.y"),
-                    npcSection.getDouble("location.z"),
-                    (float) npcSection.getDouble("location.yaw"),
-                    (float) npcSection.getDouble("location.pitch")
+                npcSection.getDouble("location.x"),
+                npcSection.getDouble("location.y"),
+                npcSection.getDouble("location.z"),
+                (float) npcSection.getDouble("location.yaw"),
+                (float) npcSection.getDouble("location.pitch")
             );
             String typeString = npcSection.getString("type");
             NpcTypeImpl type = typeRegistry.getByName(typeString);
@@ -120,7 +120,7 @@ public class FancyNpcsImporter implements DataImporter {
                     ItemStack item = equipmentSection.getItemStack(slot);
                     if (item != null) {
                         npc.setProperty(propertyRegistry.getByName(getEquipmentPropertyName(slot),
-                                com.github.retrooper.packetevents.protocol.item.ItemStack.class), SpigotConversionUtil.fromBukkitItemStack(item));
+                            com.github.retrooper.packetevents.protocol.item.ItemStack.class), SpigotConversionUtil.fromBukkitItemStack(item));
                     }
                 }
             }

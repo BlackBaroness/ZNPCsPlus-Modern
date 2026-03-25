@@ -32,15 +32,17 @@ public class ActionEditCommand implements CommandHandler {
         context.setUsage(context.getLabel() + " action edit <id> <action index> <action type> ...");
         NpcEntryImpl entry = context.parse(NpcEntryImpl.class);
         int index = context.parse(Integer.class);
-        if (index >= entry.getNpc().getActions().size() || index < 0) context.halt(Component.text("That npc doesn't have any action with the index " + index, NamedTextColor.RED));
+        if (index >= entry.getNpc().getActions().size() || index < 0)
+            context.halt(Component.text("That npc doesn't have any action with the index " + index, NamedTextColor.RED));
         List<InteractionCommandHandler> commands = actionRegistry.getCommands();
         String sub = context.popString();
-        for (InteractionCommandHandler command : commands) if (command.getSubcommandName().equalsIgnoreCase(sub)) {
-            this.commandHandler = command;
-        }
+        for (InteractionCommandHandler command : commands)
+            if (command.getSubcommandName().equalsIgnoreCase(sub)) {
+                this.commandHandler = command;
+            }
         if (this.commandHandler == null) {
             context.send(Component.text("Invalid action type, available action types:\n" +
-                    commands.stream().map(InteractionCommandHandler::getSubcommandName).collect(Collectors.joining(", ")), NamedTextColor.RED));
+                commands.stream().map(InteractionCommandHandler::getSubcommandName).collect(Collectors.joining(", ")), NamedTextColor.RED));
         }
         InteractionAction newAction = this.commandHandler.parse(context);
         entry.getNpc().editAction(index, newAction);
@@ -51,14 +53,16 @@ public class ActionEditCommand implements CommandHandler {
     public List<String> suggest(CommandContext context) throws CommandExecutionException {
         if (context.argSize() == 1) return context.suggestCollection(npcRegistry.getModifiableIds());
         if (context.argSize() == 2) return context.suggestStream(Stream.iterate(0, n -> n + 1)
-                .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getActions().size())
-                .map(String::valueOf));
+            .limit(context.suggestionParse(0, NpcEntryImpl.class).getNpc().getActions().size())
+            .map(String::valueOf));
         List<InteractionCommandHandler> commands = actionRegistry.getCommands();
-        if (context.argSize() == 3) return context.suggestStream(commands.stream().map(InteractionCommandHandler::getSubcommandName));
+        if (context.argSize() == 3)
+            return context.suggestStream(commands.stream().map(InteractionCommandHandler::getSubcommandName));
         context.popString();
         context.popString();
         String sub = context.popString();
-        for (InteractionCommandHandler command : commands) if (command.getSubcommandName().equalsIgnoreCase(sub)) return command.suggest(context);
+        for (InteractionCommandHandler command : commands)
+            if (command.getSubcommandName().equalsIgnoreCase(sub)) return command.suggest(context);
         return Collections.emptyList();
     }
 }

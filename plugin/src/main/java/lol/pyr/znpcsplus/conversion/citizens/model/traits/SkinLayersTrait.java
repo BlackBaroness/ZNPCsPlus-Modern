@@ -31,7 +31,8 @@ public class SkinLayersTrait extends SectionCitizensTrait {
         for (Map.Entry<String, String> entry : this.skinLayers.entrySet()) {
             String key = entry.getKey();
             String property = entry.getValue();
-            if (section.contains(key)) npc.setProperty(registry.getByName(property, Boolean.class), section.getBoolean(key));
+            if (section.contains(key))
+                npc.setProperty(registry.getByName(property, Boolean.class), section.getBoolean(key));
         }
         return npc;
     }

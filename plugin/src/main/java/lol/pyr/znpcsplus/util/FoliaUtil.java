@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class FoliaUtil {
     private static final Boolean FOLIA = isFolia();
+
     public static boolean isFolia() {
         if (FOLIA != null) return FOLIA;
         try {

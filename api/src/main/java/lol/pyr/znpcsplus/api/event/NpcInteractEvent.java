@@ -17,8 +17,8 @@ public class NpcInteractEvent extends CancellableNpcEvent implements Cancellable
     private final InteractionType clickType;
 
     /**
-     * @param player The player involved in the event
-     * @param entry The NPC entry involved in the event
+     * @param player    The player involved in the event
+     * @param entry     The NPC entry involved in the event
      * @param clickType The type of interaction. See {@link InteractionType}
      */
     public NpcInteractEvent(Player player, NpcEntry entry, InteractionType clickType) {
@@ -33,6 +33,7 @@ public class NpcInteractEvent extends CancellableNpcEvent implements Cancellable
 
     /**
      * Returns the type of interaction. See {@link InteractionType}
+     *
      * @return The type of interaction
      */
     public InteractionType getClickType() {

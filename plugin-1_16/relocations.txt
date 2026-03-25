@@ -1,0 +1,16 @@
+com.google.errorprone.annotations
+com.google.gson
+lol.pyr.director.adventure.command
+lol.pyr.director.adventure.message
+lol.pyr.director.adventure.parse
+lol.pyr.director.common.command
+lol.pyr.director.common.message
+lol.pyr.director.common.parse
+lol.pyr.director.common.util
+net.kyori.adventure.platform
+net.kyori.adventure.text.minimessage
+net.kyori.adventure.text.serializer.craftbukkit
+org.bstats
+org.yaml.snakeyaml
+space.arim.dazzleconf
+space.arim.dazzleconf2

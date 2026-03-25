@@ -28,9 +28,10 @@ public class CreateCommand implements CommandHandler {
     public void run(CommandContext context) throws CommandExecutionException {
         context.setUsage(context.getLabel() + " create <id> [<type>]");
         Player player = context.ensureSenderIsPlayer();
-        
+
         String id = context.popString();
-        if (npcRegistry.getById(id) != null) context.halt(Component.text("NPC with that ID already exists.", NamedTextColor.RED));
+        if (npcRegistry.getById(id) != null)
+            context.halt(Component.text("NPC with that ID already exists.", NamedTextColor.RED));
 
         NpcTypeImpl type;
         if (context.argSize() == 1) {
@@ -48,7 +49,8 @@ public class CreateCommand implements CommandHandler {
     @Override
     public List<String> suggest(CommandContext context) throws CommandExecutionException {
         if (context.argSize() == 1) return context.suggestCollection(npcRegistry.getModifiableIds());
-        if (context.argSize() == 2) return context.suggestStream(typeRegistry.getAllImpl().stream().map(NpcTypeImpl::getName));
+        if (context.argSize() == 2)
+            return context.suggestStream(typeRegistry.getAllImpl().stream().map(NpcTypeImpl::getName));
         return Collections.emptyList();
     }
 }

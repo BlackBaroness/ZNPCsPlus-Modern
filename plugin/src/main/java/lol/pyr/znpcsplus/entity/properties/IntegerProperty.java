@@ -25,7 +25,7 @@ public class IntegerProperty extends EntityPropertyImpl<Integer> {
     @Override
     public void apply(Player player, PacketEntity entity, boolean isSpawned, Map<Integer, EntityData<?>> properties) {
         properties.put(index, legacy ?
-                newEntityData(index, EntityDataTypes.BYTE, (byte) entity.getProperty(this).intValue()) :
-                newEntityData(index, EntityDataTypes.INT, entity.getProperty(this)));
+            newEntityData(index, EntityDataTypes.BYTE, (byte) entity.getProperty(this).intValue()) :
+            newEntityData(index, EntityDataTypes.INT, entity.getProperty(this)));
     }
 }

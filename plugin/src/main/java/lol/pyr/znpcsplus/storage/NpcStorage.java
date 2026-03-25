@@ -6,8 +6,11 @@ import java.util.Collection;
 
 public interface NpcStorage {
     Collection<NpcEntryImpl> loadNpcs();
+
     void saveNpcs(Collection<NpcEntryImpl> npcs);
+
     void deleteNpc(NpcEntryImpl npc);
+
     default void close() {
 
     }

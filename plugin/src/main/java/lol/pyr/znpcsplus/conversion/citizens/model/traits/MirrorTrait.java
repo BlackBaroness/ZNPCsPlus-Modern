@@ -21,7 +21,8 @@ public class MirrorTrait extends SectionCitizensTrait {
 
     @Override
     public @NotNull NpcImpl apply(NpcImpl npc, ConfigurationSection section) {
-        if (section.getBoolean("enabled")) npc.setProperty(registry.getByName("skin", SkinDescriptor.class), new MirrorDescriptor(skinCache));
+        if (section.getBoolean("enabled"))
+            npc.setProperty(registry.getByName("skin", SkinDescriptor.class), new MirrorDescriptor(skinCache));
         return npc;
     }
 }

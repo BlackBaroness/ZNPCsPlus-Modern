@@ -61,17 +61,18 @@ public class YamlSerializer implements NpcSerializer<YamlConfiguration> {
         config.set("location", serializeLocation(npc.getLocation()));
         config.set("type", npc.getType().getName());
 
-        for (EntityProperty<?> property : npc.getAllProperties()) try {
-            PropertySerializer<?> serializer = propertyRegistry.getSerializer(((EntityPropertyImpl<?>) property).getType());
-            if (serializer == null) {
-                Bukkit.getLogger().log(Level.WARNING, "Unknown serializer for property '" + property.getName() + "' for npc '" + entry.getId() + "'. skipping ...");
-                continue;
+        for (EntityProperty<?> property : npc.getAllProperties())
+            try {
+                PropertySerializer<?> serializer = propertyRegistry.getSerializer(((EntityPropertyImpl<?>) property).getType());
+                if (serializer == null) {
+                    Bukkit.getLogger().log(Level.WARNING, "Unknown serializer for property '" + property.getName() + "' for npc '" + entry.getId() + "'. skipping ...");
+                    continue;
+                }
+                config.set("properties." + property.getName(), serializer.UNSAFE_serialize(npc.getProperty(property)));
+            } catch (Exception exception) {
+                logger.severe("Failed to serialize property " + property.getName() + " for npc with id " + entry.getId());
+                exception.printStackTrace();
             }
-            config.set("properties." + property.getName(), serializer.UNSAFE_serialize(npc.getProperty(property)));
-        } catch (Exception exception) {
-            logger.severe("Failed to serialize property " + property.getName() + " for npc with id " + entry.getId());
-            exception.printStackTrace();
-        }
 
         HologramImpl hologram = npc.getHologram();
         if (hologram.getOffset() != 0.0) config.set("hologram.offset", hologram.getOffset());
@@ -82,9 +83,9 @@ public class YamlSerializer implements NpcSerializer<YamlConfiguration> {
         }
         config.set("hologram.lines", lines);
         config.set("actions", npc.getActions().stream()
-                .map(actionRegistry::serialize)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
+            .map(actionRegistry::serialize)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList()));
 
         return config;
     }
@@ -93,7 +94,7 @@ public class YamlSerializer implements NpcSerializer<YamlConfiguration> {
     public NpcEntry deserialize(YamlConfiguration config) {
         UUID uuid = config.contains("uuid") ? UUID.fromString(config.getString("uuid")) : UUID.randomUUID();
         NpcImpl npc = new NpcImpl(uuid, propertyRegistry, configManager, packetFactory, textSerializer, config.getString("world"),
-                typeRegistry.getByName(config.getString("type")), deserializeLocation(config.getConfigurationSection("location")));
+            typeRegistry.getByName(config.getString("type")), deserializeLocation(config.getConfigurationSection("location")));
 
         if (config.isBoolean("enabled")) npc.setEnabled(config.getBoolean("enabled"));
 
@@ -134,11 +135,11 @@ public class YamlSerializer implements NpcSerializer<YamlConfiguration> {
 
     public NpcLocation deserializeLocation(ConfigurationSection section) {
         return new NpcLocation(
-                section.getDouble("x"),
-                section.getDouble("y"),
-                section.getDouble("z"),
-                (float) section.getDouble("yaw"),
-                (float) section.getDouble("pitch")
+            section.getDouble("x"),
+            section.getDouble("y"),
+            section.getDouble("z"),
+            (float) section.getDouble("yaw"),
+            (float) section.getDouble("pitch")
         );
     }
 

@@ -155,11 +155,5 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,intellij+all,java,linux
-
-!/.library
-!/gradle/server-plugins
-/.jpb
-/run
-/.kotlin
-!/gradle/libs/
-!gradle/libs/**/*
+plugin-1_16/run
+plugin-1_18/run

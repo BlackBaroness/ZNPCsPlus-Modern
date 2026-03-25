@@ -12,8 +12,8 @@ public interface PropertyHolder {
      * Method used to get the value of a property from a property holder
      *
      * @param key Unique key representing a property
-     * @return The value associated with the provided property key and this holder
      * @param <T> The type of the property value
+     * @return The value associated with the provided property key and this holder
      */
     <T> T getProperty(EntityProperty<T> key);
 
@@ -28,9 +28,9 @@ public interface PropertyHolder {
     /**
      * Method used to set a value for the provided key on this property holder
      *
-     * @param key Unique key representing a property
+     * @param key   Unique key representing a property
      * @param value The value to assign to the property key on this holder
-     * @param <T> The type of the property value
+     * @param <T>   The type of the property value
      */
     <T> void setProperty(EntityProperty<T> key, T value);
 
@@ -38,7 +38,7 @@ public interface PropertyHolder {
      * Weird fix which is sadly required in order to not decrease performance
      * when using item properties, read https://github.com/Pyrbu/ZNPCsPlus/pull/129#issuecomment-1948777764
      *
-     * @param key Unique key representing a property
+     * @param key   Unique key representing a property
      * @param value The value to assign to the property key on this holder
      */
     void setItemProperty(EntityProperty<?> key, ItemStack value);

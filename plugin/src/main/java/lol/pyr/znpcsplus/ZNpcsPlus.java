@@ -4,6 +4,7 @@ import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.PacketEventsAPI;
 import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import io.github.blackbaroness.znpcplusmodern.NativeBukkitAudiences;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import lol.pyr.director.adventure.command.CommandContext;
 import lol.pyr.director.adventure.command.CommandManager;

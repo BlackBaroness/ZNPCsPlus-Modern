@@ -34,7 +34,7 @@ public class V1_20_2PacketFactory extends V1_19_3PacketFactory {
             createTeam(player, entity, properties.getProperty(propertyRegistry.getByName("glow", NamedColor.class)));
             NpcLocation location = entity.getLocation();
             sendPacket(player, new WrapperPlayServerSpawnEntity(entity.getEntityId(), Optional.of(entity.getUuid()), entity.getType(),
-                    npcLocationToVector(location), location.getPitch(), location.getYaw(), location.getYaw(), 0, Optional.of(new Vector3d())));
+                npcLocationToVector(location), location.getPitch(), location.getYaw(), location.getYaw(), 0, Optional.of(new Vector3d())));
             //noinspection DuplicatedCode
             sendPacket(player, new WrapperPlayServerEntityHeadLook(entity.getEntityId(), location.getYaw()));
             sendAllMetadata(player, entity, properties);

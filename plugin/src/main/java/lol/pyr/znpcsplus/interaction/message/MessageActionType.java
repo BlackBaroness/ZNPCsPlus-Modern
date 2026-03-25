@@ -2,9 +2,9 @@ package lol.pyr.znpcsplus.interaction.message;
 
 import lol.pyr.director.adventure.command.CommandContext;
 import lol.pyr.director.common.command.CommandExecutionException;
+import lol.pyr.znpcsplus.api.interaction.InteractionActionType;
 import lol.pyr.znpcsplus.api.interaction.InteractionType;
 import lol.pyr.znpcsplus.interaction.InteractionActionImpl;
-import lol.pyr.znpcsplus.api.interaction.InteractionActionType;
 import lol.pyr.znpcsplus.interaction.InteractionCommandHandler;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;

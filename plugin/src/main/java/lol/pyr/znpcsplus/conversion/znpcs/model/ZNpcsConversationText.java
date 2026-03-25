@@ -10,9 +10,11 @@ public class ZNpcsConversationText {
     public String[] getLines() {
         return lines;
     }
+
     public ZNpcsAction[] getActions() {
         return actions;
     }
+
     public int getDelay() {
         return delay;
     }

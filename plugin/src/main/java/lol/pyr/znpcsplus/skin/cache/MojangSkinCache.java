@@ -37,8 +37,10 @@ public class MojangSkinCache {
     }
 
     public void cleanCache() {
-        for (Map.Entry<String, SkinImpl> entry : cache.entrySet()) if (entry.getValue().isExpired()) cache.remove(entry.getKey());
-        for (Map.Entry<String, CachedId> entry : idCache.entrySet()) if (entry.getValue().isExpired()) cache.remove(entry.getKey());
+        for (Map.Entry<String, SkinImpl> entry : cache.entrySet())
+            if (entry.getValue().isExpired()) cache.remove(entry.getKey());
+        for (Map.Entry<String, CachedId> entry : idCache.entrySet())
+            if (entry.getValue().isExpired()) cache.remove(entry.getKey());
     }
 
     public CompletableFuture<SkinImpl> fetchByName(String name) {

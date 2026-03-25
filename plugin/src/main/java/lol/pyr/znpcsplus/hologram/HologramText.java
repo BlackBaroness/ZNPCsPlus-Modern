@@ -13,9 +13,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class HologramText extends HologramLine<Component> {
 
-    private static final Component BLANK  = Component.text("%blank%");
+    private static final Component BLANK = Component.text("%blank%");
 
-    public HologramText(Viewable viewable,  EntityPropertyRegistryImpl propertyRegistry, PacketFactory packetFactory, NpcLocation location, Component text) {
+    public HologramText(Viewable viewable, EntityPropertyRegistryImpl propertyRegistry, PacketFactory packetFactory, NpcLocation location, Component text) {
         super(viewable, text, packetFactory, EntityTypes.ARMOR_STAND, location);
         addProperty(propertyRegistry.getByName("name"));
         addProperty(propertyRegistry.getByName("invisible"));

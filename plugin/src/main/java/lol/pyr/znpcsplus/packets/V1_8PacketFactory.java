@@ -62,7 +62,7 @@ public class V1_8PacketFactory implements PacketFactory {
             createTeam(player, entity, properties.getProperty(propertyRegistry.getByName("glow", NamedColor.class)));
             NpcLocation location = entity.getLocation();
             sendPacket(player, new WrapperPlayServerSpawnPlayer(entity.getEntityId(),
-                    entity.getUuid(), npcLocationToVector(location), location.getYaw(), location.getPitch(), Collections.emptyList()));
+                entity.getUuid(), npcLocationToVector(location), location.getYaw(), location.getPitch(), Collections.emptyList()));
             sendPacket(player, new WrapperPlayServerEntityHeadLook(entity.getEntityId(), location.getYaw()));
             sendAllMetadata(player, entity, properties);
             sendAllAttributes(player, entity, properties);
@@ -76,10 +76,10 @@ public class V1_8PacketFactory implements PacketFactory {
         EntityType type = entity.getType();
         ClientVersion clientVersion = packetEvents.getServerManager().getVersion().toClientVersion();
         sendPacket(player, type.getLegacyId(clientVersion) == -1 ?
-                new WrapperPlayServerSpawnLivingEntity(entity.getEntityId(), entity.getUuid(), type, npcLocationToVector(location),
-                        location.getYaw(), location.getPitch(), location.getYaw(), new Vector3d(), Collections.emptyList()) :
-                new WrapperPlayServerSpawnEntity(entity.getEntityId(), Optional.of(entity.getUuid()), entity.getType(), npcLocationToVector(location),
-                        location.getPitch(), location.getYaw(), location.getYaw(), 0, Optional.empty()));
+            new WrapperPlayServerSpawnLivingEntity(entity.getEntityId(), entity.getUuid(), type, npcLocationToVector(location),
+                location.getYaw(), location.getPitch(), location.getYaw(), new Vector3d(), Collections.emptyList()) :
+            new WrapperPlayServerSpawnEntity(entity.getEntityId(), Optional.of(entity.getUuid()), entity.getType(), npcLocationToVector(location),
+                location.getPitch(), location.getYaw(), location.getYaw(), 0, Optional.empty()));
         sendAllMetadata(player, entity, properties);
         if (EntityTypes.isTypeInstanceOf(type, EntityTypes.LIVINGENTITY)) sendAllAttributes(player, entity, properties);
         createTeam(player, entity, properties.getProperty(propertyRegistry.getByName("glow", NamedColor.class)));
@@ -108,17 +108,17 @@ public class V1_8PacketFactory implements PacketFactory {
         if (entity.getType() != EntityTypes.PLAYER) return CompletableFuture.completedFuture(null);
         CompletableFuture<Void> future = new CompletableFuture<>();
         Component displayName = tabListDisplayNameProperty != null && properties.getProperty(tabListDisplayNameProperty.get()) != null ?
-                PapiUtil.set(textSerializer, player, properties.getProperty(tabListDisplayNameProperty.get())) :
-                Component.text(PapiUtil.set(player, configManager.getConfig().tabDisplayName()
-                        .replace("{id}", Integer.toString(entity.getEntityId()))
-                        .replace("{name}", displayNameProperty != null && properties.hasProperty(displayNameProperty.get()) ?
-                                properties.getProperty(displayNameProperty.get()) :
-                                "")
-                ));
+            PapiUtil.set(textSerializer, player, properties.getProperty(tabListDisplayNameProperty.get())) :
+            Component.text(PapiUtil.set(player, configManager.getConfig().tabDisplayName()
+                .replace("{id}", Integer.toString(entity.getEntityId()))
+                .replace("{name}", displayNameProperty != null && properties.hasProperty(displayNameProperty.get()) ?
+                    properties.getProperty(displayNameProperty.get()) :
+                    "")
+            ));
         skinned(player, properties, new UserProfile(entity.getUuid(), Integer.toString(entity.getEntityId()))).thenAccept(profile -> {
             sendPacket(player, new WrapperPlayServerPlayerInfo(
-                    WrapperPlayServerPlayerInfo.Action.ADD_PLAYER, new WrapperPlayServerPlayerInfo.PlayerData(
-                            displayName, profile, GameMode.CREATIVE, 1)));
+                WrapperPlayServerPlayerInfo.Action.ADD_PLAYER, new WrapperPlayServerPlayerInfo.PlayerData(
+                displayName, profile, GameMode.CREATIVE, 1)));
             future.complete(null);
         });
         return future;
@@ -128,21 +128,21 @@ public class V1_8PacketFactory implements PacketFactory {
     public void removeTabPlayer(Player player, PacketEntity entity) {
         if (entity.getType() != EntityTypes.PLAYER) return;
         sendPacket(player, new WrapperPlayServerPlayerInfo(
-                WrapperPlayServerPlayerInfo.Action.REMOVE_PLAYER, new WrapperPlayServerPlayerInfo.PlayerData(null,
-                new UserProfile(entity.getUuid(), null), null, -1)));
+            WrapperPlayServerPlayerInfo.Action.REMOVE_PLAYER, new WrapperPlayServerPlayerInfo.PlayerData(null,
+            new UserProfile(entity.getUuid(), null), null, -1)));
     }
 
     @Override
     public void createTeam(Player player, PacketEntity entity, NamedColor namedColor) {
         sendPacket(player, new WrapperPlayServerTeams("npc_team_" + entity.getEntityId(), WrapperPlayServerTeams.TeamMode.CREATE, new WrapperPlayServerTeams.ScoreBoardTeamInfo(
-                Component.text(" "), null, null,
-                WrapperPlayServerTeams.NameTagVisibility.NEVER,
-                WrapperPlayServerTeams.CollisionRule.NEVER,
-                namedColor == null ? NamedTextColor.WHITE : NamedTextColor.NAMES.value(namedColor.name().toLowerCase()),
-                WrapperPlayServerTeams.OptionData.NONE
+            Component.text(" "), null, null,
+            WrapperPlayServerTeams.NameTagVisibility.NEVER,
+            WrapperPlayServerTeams.CollisionRule.NEVER,
+            namedColor == null ? NamedTextColor.WHITE : NamedTextColor.NAMES.value(namedColor.name().toLowerCase()),
+            WrapperPlayServerTeams.OptionData.NONE
         )));
         sendPacket(player, new WrapperPlayServerTeams("npc_team_" + entity.getEntityId(), WrapperPlayServerTeams.TeamMode.ADD_ENTITIES, (WrapperPlayServerTeams.ScoreBoardTeamInfo) null,
-                entity.getType() == EntityTypes.PLAYER ? Integer.toString(entity.getEntityId()) : entity.getUuid().toString()));
+            entity.getType() == EntityTypes.PLAYER ? Integer.toString(entity.getEntityId()) : entity.getUuid().toString()));
     }
 
     @Override
@@ -153,7 +153,8 @@ public class V1_8PacketFactory implements PacketFactory {
     @Override
     public void sendAllMetadata(Player player, PacketEntity entity, PropertyHolder properties) {
         Map<Integer, EntityData<?>> datas = new HashMap<>();
-        for (EntityProperty<?> property : properties.getAppliedProperties()) ((EntityPropertyImpl<?>) property).apply(player, entity, false, datas);
+        for (EntityProperty<?> property : properties.getAppliedProperties())
+            ((EntityPropertyImpl<?>) property).apply(player, entity, false, datas);
         sendMetadata(player, entity, new ArrayList<>(datas.values()));
     }
 
@@ -164,7 +165,7 @@ public class V1_8PacketFactory implements PacketFactory {
 
     @Override
     public void sendHeadRotation(Player player, PacketEntity entity, float yaw, float pitch) {
-        sendPacket(player, new WrapperPlayServerEntityHeadLook(entity.getEntityId(),yaw));
+        sendPacket(player, new WrapperPlayServerEntityHeadLook(entity.getEntityId(), yaw));
         sendPacket(player, new WrapperPlayServerEntityRotation(entity.getEntityId(), yaw, pitch, true));
     }
 
@@ -183,7 +184,8 @@ public class V1_8PacketFactory implements PacketFactory {
     }
 
     protected CompletableFuture<UserProfile> skinned(Player player, PropertyHolder properties, UserProfile profile) {
-        if (!properties.hasProperty(propertyRegistry.getByName("skin"))) return CompletableFuture.completedFuture(profile);
+        if (!properties.hasProperty(propertyRegistry.getByName("skin")))
+            return CompletableFuture.completedFuture(profile);
         BaseSkinDescriptor descriptor = (BaseSkinDescriptor) properties.getProperty(propertyRegistry.getByName("skin", SkinDescriptor.class));
         if (descriptor.supportsInstant(player)) {
             descriptor.fetchInstant(player).apply(profile);
@@ -204,17 +206,17 @@ public class V1_8PacketFactory implements PacketFactory {
     @Override
     public void sendHandSwing(Player player, PacketEntity entity, boolean offHand) {
         sendPacket(player, new WrapperPlayServerEntityAnimation(entity.getEntityId(), offHand ?
-                WrapperPlayServerEntityAnimation.EntityAnimationType.SWING_OFF_HAND :
-                WrapperPlayServerEntityAnimation.EntityAnimationType.SWING_MAIN_ARM));
+            WrapperPlayServerEntityAnimation.EntityAnimationType.SWING_OFF_HAND :
+            WrapperPlayServerEntityAnimation.EntityAnimationType.SWING_MAIN_ARM));
     }
 
     @Override
     public void sendAllAttributes(Player player, PacketEntity entity, PropertyHolder properties) {
         List<WrapperPlayServerUpdateAttributes.Property> attributesList = new ArrayList<>();
         properties.getAppliedProperties()
-                .stream()
-                .filter(property -> property instanceof AttributeProperty)
-                .forEach(property -> ((AttributeProperty) property).apply(player, entity, false, attributesList));
+            .stream()
+            .filter(property -> property instanceof AttributeProperty)
+            .forEach(property -> ((AttributeProperty) property).apply(player, entity, false, attributesList));
         sendPacket(player, new WrapperPlayServerUpdateAttributes(entity.getEntityId(), attributesList));
     }
 
@@ -227,10 +229,10 @@ public class V1_8PacketFactory implements PacketFactory {
     public void updateDisplayName(Player player, PacketEntity entity, Component displayName) {
         if (entity.getType() != EntityTypes.PLAYER) return;
         sendPacket(player, new WrapperPlayServerPlayerInfo(
-                WrapperPlayServerPlayerInfo.Action.UPDATE_DISPLAY_NAME, new WrapperPlayServerPlayerInfo.PlayerData(
-                    displayName,
-                    new UserProfile(entity.getUuid(), null), null, -1
-                )
+            WrapperPlayServerPlayerInfo.Action.UPDATE_DISPLAY_NAME, new WrapperPlayServerPlayerInfo.PlayerData(
+            displayName,
+            new UserProfile(entity.getUuid(), null), null, -1
+        )
         ));
     }
 }

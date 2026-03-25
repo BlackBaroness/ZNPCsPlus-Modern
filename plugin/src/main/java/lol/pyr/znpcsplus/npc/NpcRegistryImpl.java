@@ -112,20 +112,20 @@ public class NpcRegistryImpl implements NpcRegistry {
 
     public Collection<NpcEntryImpl> getProcessable() {
         return Collections.unmodifiableCollection(npcList.stream()
-                .filter(NpcEntryImpl::isProcessed)
-                .collect(Collectors.toList()));
+            .filter(NpcEntryImpl::isProcessed)
+            .collect(Collectors.toList()));
     }
 
     public Collection<NpcEntryImpl> getAllModifiable() {
         return Collections.unmodifiableCollection(npcList.stream()
-                .filter(NpcEntryImpl::isAllowCommandModification)
-                .collect(Collectors.toList()));
+            .filter(NpcEntryImpl::isAllowCommandModification)
+            .collect(Collectors.toList()));
     }
 
     public NpcEntryImpl getByEntityId(int id) {
         return npcList.stream().filter(entry -> entry.getNpc().getEntity().getEntityId() == id ||
-                        entry.getNpc().getHologram().getLines().stream().anyMatch(line -> line.getEntityId() == id)) // Also match the holograms of npcs
-                .findFirst().orElse(null);
+                entry.getNpc().getHologram().getLines().stream().anyMatch(line -> line.getEntityId() == id)) // Also match the holograms of npcs
+            .findFirst().orElse(null);
     }
 
     public Collection<String> getAllIds() {
@@ -140,15 +140,15 @@ public class NpcRegistryImpl implements NpcRegistry {
     @Override
     public Collection<String> getAllPlayerMadeIds() {
         return getAllModifiable().stream()
-                .map(NpcEntryImpl::getId)
-                .collect(Collectors.toSet());
+            .map(NpcEntryImpl::getId)
+            .collect(Collectors.toSet());
     }
 
     public Collection<String> getModifiableIds() {
         return Collections.unmodifiableSet(npcIdLookupMap.entrySet().stream()
-                .filter(entry -> entry.getValue().isAllowCommandModification())
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toSet()));
+            .filter(entry -> entry.getValue().isAllowCommandModification())
+            .map(Map.Entry::getKey)
+            .collect(Collectors.toSet()));
     }
 
     public NpcEntryImpl create(String id, World world, NpcType type, NpcLocation location) {
@@ -157,7 +157,8 @@ public class NpcRegistryImpl implements NpcRegistry {
 
     public NpcEntryImpl create(String id, World world, NpcTypeImpl type, NpcLocation location) {
         id = id.toLowerCase();
-        if (npcIdLookupMap.containsKey(id)) throw new IllegalArgumentException("An npc with the id " + id + " already exists!");
+        if (npcIdLookupMap.containsKey(id))
+            throw new IllegalArgumentException("An npc with the id " + id + " already exists!");
         NpcImpl npc = new NpcImpl(UUID.randomUUID(), propertyRegistry, configManager, textSerializer, world, type, location, packetFactory);
         type.applyDefaultProperties(npc);
         NpcEntryImpl entry = new NpcEntryImpl(id, npc);
@@ -183,12 +184,10 @@ public class NpcRegistryImpl implements NpcRegistry {
             if (line instanceof HologramText) {
                 HologramText text = (HologramText) line;
                 newNpc.getNpc().getHologram().addTextLineComponent(text.getValue());
-            }
-            else if (line instanceof HologramItem) {
+            } else if (line instanceof HologramItem) {
                 HologramItem item = (HologramItem) line;
                 newNpc.getNpc().getHologram().addItemLinePEStack(item.getValue());
-            }
-            else throw new IllegalArgumentException("Unknown hologram line type during clone");
+            } else throw new IllegalArgumentException("Unknown hologram line type during clone");
         }
 
         return newNpc;
