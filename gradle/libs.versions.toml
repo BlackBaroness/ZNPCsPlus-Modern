@@ -24,6 +24,6 @@ director = { module = "lol.pyr:director-adventure", version = "2.1.2" }
 
 [plugins]
 lombok = { id = "io.freefair.lombok", version = "9.2.0" }
-pluginYml-bukkit = { id = "de.eldoria.plugin-yml.bukkit", version = "0.8.0" }
+pluginYml-bukkit = { id = "de.eldoria.plugin-yml.bukkit", version = "0.9.0" }
 shadow = { id = "com.gradleup.shadow", version = "9.4.0" }
 runTask-paper = { id = "xyz.jpenilla.run-paper", version = "3.0.2" }
