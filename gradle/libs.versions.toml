@@ -3,7 +3,7 @@ adventure-platform = "4.4.1"
 
 [libraries]
 # Paper
-paper-1-18 = { module = "io.papermc.paper:paper-api", version = "1.18.2-R0.1-SNAPSHOT" }
+paper-1-18 = { module = "io.papermc.paper:paper-api", version = "26.1.2.build.72-stable" }
 paper-1-16 = { module = "com.destroystokyo.paper:paper-api", version = "1.16.5-R0.1-SNAPSHOT" }
 paper-1-9 = { module = "com.destroystokyo.paper:paper-api", version = "1.9.4-R0.1-SNAPSHOT" }
 
@@ -13,17 +13,17 @@ adventure-platform-facet = { module = "net.kyori:adventure-platform-facet", vers
 adventure-platform-bukkit = { module = "net.kyori:adventure-platform-bukkit", version.ref = "adventure-platform" }
 
 # Misc
-minimessage = { module = "net.kyori:adventure-text-minimessage", version = "4.26.1" }
+minimessage = { module = "net.kyori:adventure-text-minimessage", version = "5.1.1" }
 placeholderapi = { module = "me.clip:placeholderapi", version = "2.12.2" }
-packetevents = { module = "com.github.retrooper:packetevents-spigot", version = "2.11.2" }
+packetevents = { module = "com.github.retrooper:packetevents-spigot", version = "2.13.0" }
 annotations = { module = "org.jetbrains:annotations", version = "26.1.0" }
-gson = { module = "com.google.code.gson:gson", version = "2.13.2" }
+gson = { module = "com.google.code.gson:gson", version = "2.14.0" }
 bstats = { module = "org.bstats:bstats-bukkit", version = "3.2.1" }
 dazzleconf = { module = "space.arim.dazzleconf:dazzleconf-ext-snakeyaml", version = "1.4.0-M2" }
 director = { module = "lol.pyr:director-adventure", version = "2.1.2" }
 
 [plugins]
-lombok = { id = "io.freefair.lombok", version = "9.2.0" }
+lombok = { id = "io.freefair.lombok", version = "9.5.0" }
 pluginYml-bukkit = { id = "de.eldoria.plugin-yml.bukkit", version = "0.9.0" }
-shadow = { id = "com.gradleup.shadow", version = "9.4.1" }
+shadow = { id = "com.gradleup.shadow", version = "9.4.3" }
 runTask-paper = { id = "xyz.jpenilla.run-paper", version = "3.0.2" }

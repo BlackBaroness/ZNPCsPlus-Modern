@@ -17,7 +17,7 @@ jobs:
       BUILD_ID: ${{ github.run_number }}
     steps:
       - name: Clone project
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install JDK
         uses: actions/setup-java@v5
@@ -33,7 +33,7 @@ jobs:
         run: chmod +x ./gradlew && ./gradlew clean build --refresh-dependencies
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}-build.${{ github.run_number }}
           name: 'Build #${{ github.run_number }}'
