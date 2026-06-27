@@ -710,7 +710,7 @@ public class EntityPropertyRegistryImpl implements EntityPropertyRegistry {
         // Hoglin and Piglin Zombification
         final int hoglinZombificationIndex;
         if (ver.isNewerThanOrEquals(ServerVersion.V_26_1)) hoglinZombificationIndex = 18;
-        elseif (ver.isNewerThanOrEquals(ServerVersion.V_1_17))
+        else if (ver.isNewerThanOrEquals(ServerVersion.V_1_17))
             hoglinZombificationIndex = 17;
         else hoglinZombificationIndex = 16;
         register(new BooleanProperty("hoglin_immune_to_zombification", hoglinZombificationIndex, false, legacyBooleans));
