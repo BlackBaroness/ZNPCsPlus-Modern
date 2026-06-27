@@ -3,7 +3,7 @@ adventure-platform = "4.4.1"
 
 [libraries]
 # Paper
-paper-1-18 = { module = "io.papermc.paper:paper-api", version = "26.1.2.build.72-stable" }
+paper-1-18 = { module = "io.papermc.paper:paper-api", version = "1.18.2-R0.1-SNAPSHOT" }
 paper-1-16 = { module = "com.destroystokyo.paper:paper-api", version = "1.16.5-R0.1-SNAPSHOT" }
 paper-1-9 = { module = "com.destroystokyo.paper:paper-api", version = "1.9.4-R0.1-SNAPSHOT" }
 

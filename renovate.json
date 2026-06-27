@@ -4,5 +4,8 @@
         "config:recommended",
         "group:all"
     ],
-    "includeForks": true
+    "includeForks": true,
+    "ignoreDeps": [
+        "io.papermc.paper:paper-api"
+    ]
 }
