@@ -6,6 +6,7 @@
     ],
     "includeForks": true,
     "ignoreDeps": [
-        "io.papermc.paper:paper-api"
+        "io.papermc.paper:paper-api",
+        "net.kyori:adventure-text-minimessage"
     ]
 }

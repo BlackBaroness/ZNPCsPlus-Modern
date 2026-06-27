@@ -13,7 +13,7 @@ adventure-platform-facet = { module = "net.kyori:adventure-platform-facet", vers
 adventure-platform-bukkit = { module = "net.kyori:adventure-platform-bukkit", version.ref = "adventure-platform" }
 
 # Misc
-minimessage = { module = "net.kyori:adventure-text-minimessage", version = "5.1.1" }
+minimessage = { module = "net.kyori:adventure-text-minimessage", version = "4.26.1" }
 placeholderapi = { module = "me.clip:placeholderapi", version = "2.12.2" }
 packetevents = { module = "com.github.retrooper:packetevents-spigot", version = "2.13.0" }
 annotations = { module = "org.jetbrains:annotations", version = "26.1.0" }
