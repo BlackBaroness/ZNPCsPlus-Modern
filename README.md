@@ -38,7 +38,7 @@ Looking for up-to-date builds of the plugin? Check out our [Jenkins](https://ci.
 
 - 100% Packet Based - Nothing is ran on the main thread
 - Performance & stability oriented code
-- Support for all versions from 1.8 to 1.21.8
+- Support for all versions from 1.8 to 26.2
 - Support for multiple different storage options
 - Intuitive command system
 
@@ -47,7 +47,7 @@ Looking for up-to-date builds of the plugin? Check out our [Jenkins](https://ci.
 Requirements:
 
 - Java 8+
-- Minecraft 1.8 - 1.21.8
+- Minecraft 1.8 - 26.2
 
 Supported Softwares:
 

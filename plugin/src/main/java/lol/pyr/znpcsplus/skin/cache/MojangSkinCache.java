@@ -54,6 +54,8 @@ public class MojangSkinCache {
             HttpURLConnection connection = null;
             try {
                 connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(10000);
+                connection.setConnectTimeout(15000);
                 connection.setRequestMethod("GET");
                 try (Reader reader = new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8)) {
                     JsonObject obj = JsonParser.parseReader(reader).getAsJsonObject();
@@ -87,6 +89,8 @@ public class MojangSkinCache {
             HttpURLConnection connection = null;
             try {
                 connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(10000);
+                connection.setConnectTimeout(15000);
                 connection.setRequestMethod("GET");
                 try (Reader reader = new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8)) {
                     JsonObject obj = JsonParser.parseReader(reader).getAsJsonObject();
@@ -118,6 +122,8 @@ public class MojangSkinCache {
             HttpURLConnection connection = null;
             try {
                 connection = (HttpURLConnection) apiUrl.openConnection();
+                connection.setReadTimeout(10000);
+                connection.setConnectTimeout(15000);
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("accept", "application/json");
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -152,7 +158,7 @@ public class MojangSkinCache {
     public CompletableFuture<SkinImpl> fetchFromFile(String path) throws FileNotFoundException {
         File file = new File(skinsFolder, path);
         if (!file.exists()) throw new FileNotFoundException("File not found: " + path);
-        return CompletableFuture.supplyAsync(() -> {
+        return FutureUtil.exceptionPrintingSupplyAsync(() -> {
             URL apiUrl = parseUrl("https://api.mineskin.org/generate/upload");
             HttpURLConnection connection = null;
             try {
@@ -234,6 +240,8 @@ public class MojangSkinCache {
             HttpURLConnection connection = null;
             try {
                 connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(10000);
+                connection.setConnectTimeout(15000);
                 connection.setRequestMethod("GET");
                 try (Reader reader = new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8)) {
                     JsonObject obj = JsonParser.parseReader(reader).getAsJsonObject();
