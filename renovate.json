@@ -4,7 +4,7 @@
         "config:recommended",
         "group:all"
     ],
-    "includeForks": true,
+    "forkProcessing": "enabled",
     "ignoreDeps": [
         "io.papermc.paper:paper-api",
         "net.kyori:adventure-text-minimessage"
