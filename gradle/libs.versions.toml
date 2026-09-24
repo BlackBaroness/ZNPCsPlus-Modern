@@ -15,7 +15,7 @@ adventure-platform-bukkit = { module = "net.kyori:adventure-platform-bukkit", ve
 # Misc
 minimessage = { module = "net.kyori:adventure-text-minimessage", version = "4.26.1" }
 placeholderapi = { module = "me.clip:placeholderapi", version = "2.12.3" }
-packetevents = { module = "com.github.retrooper:packetevents-spigot", version = "2.13.0" }
+packetevents = { module = "com.github.retrooper:packetevents-spigot", version = "2.14.0" }
 annotations = { module = "org.jetbrains:annotations", version = "26.1.0" }
 gson = { module = "com.google.code.gson:gson", version = "2.14.0" }
 bstats = { module = "org.bstats:bstats-bukkit", version = "3.2.1" }
@@ -23,7 +23,7 @@ dazzleconf = { module = "space.arim.dazzleconf:dazzleconf-ext-snakeyaml", versio
 director = { module = "lol.pyr:director-adventure", version = "2.1.2" }
 
 [plugins]
-lombok = { id = "io.freefair.lombok", version = "9.5.0" }
+lombok = { id = "io.freefair.lombok", version = "9.7.0" }
 pluginYml-bukkit = { id = "de.eldoria.plugin-yml.bukkit", version = "0.9.0" }
-shadow = { id = "com.gradleup.shadow", version = "9.5.1" }
-runTask-paper = { id = "xyz.jpenilla.run-paper", version = "3.0.2" }
+shadow = { id = "com.gradleup.shadow", version = "9.6.1" }
+runTask-paper = { id = "xyz.jpenilla.run-paper", version = "3.1.0" }
